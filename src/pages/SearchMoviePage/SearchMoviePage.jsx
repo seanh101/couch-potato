@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 function SearchMoviePage() {
   const [searchResults, setSearchResults] = useState([]);
 
@@ -14,8 +13,27 @@ function SearchMoviePage() {
 
     if (response.ok) {
       const { Search: movies } = data;
-      // Set the search results in the component state
-      setSearchResults(movies);
+      // Fetch additional details for new search results
+      const updatedMovies = await Promise.all(
+        movies.map(async (movie) => {
+          const movieResponse = await fetch(`http://www.omdbapi.com/?apikey=fa324692&i=${movie.imdbID}`);
+          const movieData = await movieResponse.json();
+          if (movieResponse.ok) {
+            const { Plot, Runtime, Genre } = movieData;
+            return {
+              ...movie,
+              Plot,
+              Runtime,
+              Genre,
+            };
+          } else {
+            console.error('Failed to fetch movie details');
+            return movie;
+          }
+        })
+      );
+      // Set the updated search results in the component state
+      setSearchResults(updatedMovies);
     } else {
       console.error('Failed to search movies');
     }
@@ -33,7 +51,12 @@ function SearchMoviePage() {
         {searchResults.map((movie) => (
           <div key={movie.imdbID}>
             <h2>{movie.Title}</h2>
-            <p>{movie.Year}</p>
+            <p>Year: {movie.Year}</p>
+            <img src={movie.Poster} alt={movie.Title} />
+            {/* Render additional details */}
+            {movie.Plot && <p>Plot: {movie.Plot}</p>}
+            {movie.Runtime && <p>Runtime: {movie.Runtime}</p>}
+            {movie.Genre && <p>Genre: {movie.Genre}</p>}
           </div>
         ))}
       </div>
@@ -42,6 +65,12 @@ function SearchMoviePage() {
 }
 
 export default SearchMoviePage;
+
+
+
+
+
+
 
 
 
