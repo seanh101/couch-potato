@@ -41,17 +41,33 @@ function SearchMoviePage() {
     }
   };
 
-  const handleToggleFavorite = (movie) => {
-    const isFavorite = favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID);
+  const handleAddFavorite = async (movie) => {
+  const { Title, Plot, Runtime } = movie;
 
-    if (isFavorite) {
-      setFavoriteMovies((prevFavorites) =>
-        prevFavorites.filter((favMovie) => favMovie.imdbID !== movie.imdbID)
-      );
-    } else {
+  try {
+    const response = await fetch('/api/movies/favorites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        imdbID: movie.imdbID,
+        title: Title,
+        plot: Plot,
+        length: Runtime,
+      }),
+    });
+
+    if (response.ok) {
       setFavoriteMovies((prevFavorites) => [...prevFavorites, movie]);
+    } else {
+      console.error('Failed to add movie to favorites');
     }
-  };
+  } catch (error) {
+    console.error('Failed to add movie to favorites', error);
+  }
+};
+
 
   return (
     <div className="container">
@@ -73,11 +89,12 @@ function SearchMoviePage() {
             <p className="movie-year">Year: {movie.Year}</p>
             <button
               className={`favorite-button ${favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID) ? 'favorited' : ''}`}
-              onClick={() => handleToggleFavorite(movie)}
+              onClick={() => handleAddFavorite(movie)}
+              disabled={favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)}
             >
               {favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)
-                ? 'Remove from Favorites'
-                : 'Favorite'}
+                ? 'Added to Favorites'
+                : 'Add Favorite'}
             </button>
           </div>
         ))}
@@ -87,6 +104,8 @@ function SearchMoviePage() {
 }
 
 export default SearchMoviePage;
+
+
 
 
 
