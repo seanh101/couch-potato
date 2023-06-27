@@ -1,0 +1,36 @@
+/* CSS for NavBar */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f8f8;
+    padding: 10px 20px;
+    height: 80px; /* Adjust the height as desired */
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 75px; /* Adjust the logo height as desired */
+    width: auto;
+    margin-right: 10px; /* Add margin as desired */
+  }
+  
+  /* Additional CSS styles for the rest of the NavBar elements */
+  nav a {
+    color: #333;
+    text-decoration: none;
+    margin-right: 10px; /* Add margin as desired */
+  }
+  
+  nav span {
+    margin-right: 10px; /* Add margin as desired */
+  }
+  
+  nav a:last-child {
+    margin-right: 0;
+  }
+  
