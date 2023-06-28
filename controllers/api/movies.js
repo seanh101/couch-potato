@@ -1,4 +1,6 @@
 // Search for movies using the OMDB API
+const Movie = require('../../models/movie');
+
 exports.searchMovies = async (req, res) => {
     
 
@@ -50,6 +52,20 @@ exports.searchMovies = async (req, res) => {
     } catch (error) {
       console.error('Failed to add movie to favorites', error);
       res.status(500).json({ error: 'Failed to add movie to favorites' });
+    }
+  };
+
+  exports.removeFavoriteMovie = async (req, res) => {
+    try {
+      const movieId = req.params.id;
+      // Find and remove the movie from the database
+      await Movie.findByIdAndRemove(movieId);
+      // Fetch the updated list of favorite movies
+      const favoriteMovies = await Movie.find({ isFavorite: true });
+      res.json(favoriteMovies);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to remove favorite movie' });
     }
   };
   

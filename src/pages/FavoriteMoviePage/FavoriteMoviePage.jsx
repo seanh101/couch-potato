@@ -11,6 +11,17 @@ const FavoriteMoviePage = () => {
       .catch((error) => console.error('Error:', error));
   }, []);
 
+  const handleToggleFavorite = (movieId) => {
+    // Send a request to the server to remove the movie from favorites
+    fetch(`/api/movies/favorites/${movieId}`, { method: 'DELETE' })
+      .then((response) => response.json())
+      .then((data) => {
+        // Update the favorite movies list
+        setFavoriteMovies(data);
+      })
+      .catch((error) => console.error('Error:', error));
+  };
+
   return (
     <div>
       <h1>Favorite Movies</h1>
@@ -19,12 +30,13 @@ const FavoriteMoviePage = () => {
       ) : (
         <div>
           {favoriteMovies.map((movie) => (
-            <div key={movie.imdbID}>
+            <div key={movie._id}>
               <h2>{movie.title}</h2>
-              <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
+              <img className="movie-poster" src={movie.poster} alt={movie.title} />
               <p>Plot: {movie.plot}</p>
               <p>Length: {movie.length}</p>
               <p>Is Favorite: {movie.isFavorite ? 'Yes' : 'No'}</p>
+              <button onClick={() => handleToggleFavorite(movie._id)}>Remove from Favorites</button>
             </div>
           ))}
         </div>
@@ -34,6 +46,7 @@ const FavoriteMoviePage = () => {
 };
 
 export default FavoriteMoviePage;
+
 
 
 

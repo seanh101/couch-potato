@@ -9,4 +9,10 @@ const movieSchema = new mongoose.Schema({
   isFavorite: { type: Boolean, default: false },
 });
 
+movieSchema.methods.toggleFavorite = function () {
+    this.isFavorite = !this.isFavorite;
+    return this.save();
+  };
+
+  
 module.exports = mongoose.model('Movie', movieSchema);

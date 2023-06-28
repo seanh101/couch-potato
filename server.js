@@ -12,7 +12,7 @@ require('./config/database');
 const app = express();
 
 app.use(session({
-  secret: 'your-secret-key',
+  secret: 'secret',
   resave: false,
   saveUninitialized: false,
   // Other session options...
