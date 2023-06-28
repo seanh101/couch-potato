@@ -34,40 +34,41 @@ const port = process.env.PORT || 3001;
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
 
+
 // Route handler to add a movie to favorites
-app.post('/api/movies/favorites', (req, res) => {
-  const { imdbID, title, plot, length } = req.body;
+// app.post('/api/movies/favorites', (req, res) => {
+//   const { imdbID, title, plot, length } = req.body;
 
   // Create a new movie object with the necessary fields
-  const newMovie = new Movie({
-    imdbID,
-    title,
-    plot,
-    length,
-    isFavorite: true,
-  });
+  // const newMovie = new Movie({
+  //   imdbID,
+  //   title,
+  //   plot,
+  //   length,
+  //   isFavorite: true,
+  // });
 
   // Save the new movie to the database
-  newMovie.save()
-    .then(() => {
-      res.status(200).json({ message: 'Movie added to favorites' });
-    })
-    .catch((error) => {
-      res.status(500).json({ error: 'Failed to add movie to favorites' });
-    });
-});
+//   newMovie.save()
+//     .then(() => {
+//       res.status(200).json({ message: 'Movie added to favorites' });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({ error: 'Failed to add movie to favorites' });
+//     });
+// });
 
 // Route handler to get favorite movies
-app.get('/api/movies/favorites', (req, res) => {
-  // Retrieve all favorite movies from the database
-  Movie.find({ isFavorite: true })
-    .then((movies) => {
-      res.status(200).json(movies);
-    })
-    .catch((error) => {
-      res.status(500).json({ error: 'Failed to retrieve favorite movies' });
-    });
-});
+// app.get('/api/movies/favorites', (req, res) => {
+//   // Retrieve all favorite movies from the database
+//   Movie.find({ isFavorite: true })
+//     .then((movies) => {
+//       res.status(200).json(movies);
+//     })
+//     .catch((error) => {
+//       res.status(500).json({ error: 'Failed to retrieve favorite movies' });
+//     });
+// });
 
 app.use('/api/movies', require('./routes/api/movies'));
 

@@ -42,36 +42,37 @@ function SearchMoviePage() {
   };
 
   const handleAddFavorite = async (movie) => {
-  const { Title, Plot, Runtime } = movie;
-
-  try {
-    const response = await fetch('/api/movies/favorites', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        imdbID: movie.imdbID,
-        title: Title,
-        plot: Plot,
-        length: Runtime,
-      }),
-    });
-
-    if (response.ok) {
-      setFavoriteMovies((prevFavorites) => [...prevFavorites, movie]);
-    } else {
-      console.error('Failed to add movie to favorites');
+    const { Title, Plot, Runtime, Poster } = movie;
+  
+    try {
+      const response = await fetch('/api/movies/favorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          imdbID: movie.imdbID,
+          title: Title,
+          plot: Plot,
+          length: Runtime,
+          poster: Poster, // Add the movie poster to the request body
+        }),
+      });
+  
+      if (response.ok) {
+        setFavoriteMovies((prevFavorites) => [...prevFavorites, movie]);
+      } else {
+        console.error('Failed to add movie to favorites');
+      }
+    } catch (error) {
+      console.error('Failed to add movie to favorites', error);
     }
-  } catch (error) {
-    console.error('Failed to add movie to favorites', error);
-  }
-};
-
+  };
+  
 
   return (
     <div className="container">
-      <h1>Search Movies</h1>
+      <h1>Search Movies & TV</h1>
       <form className="search-form" onSubmit={handleSearch}>
         <input className="search-input" type="text" name="searchTerm" placeholder="Enter movie title" />
         <button className="search-button" type="submit">Search</button>

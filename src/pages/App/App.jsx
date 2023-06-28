@@ -4,10 +4,12 @@ import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import SearchMoviePage from '../SearchMoviePage/SearchMoviePage';
 import FavoriteMoviePage from '../FavoriteMoviePage/FavoriteMoviePage';
+import StreamSearchPage from '../StreamSearchPage/StreamSearchPage';
 import NavBar from '../../components/NavBar/NavBar';
+import { useState } from 'react'
 
 export default function App() {
-  const user = getUser();
+  const [user, setUser] = useState(getUser());
 
   return (
     <main className="App">
@@ -17,11 +19,12 @@ export default function App() {
           <Routes>
             <Route path="/movies" element={<FavoriteMoviePage />} />
             <Route path="/search" element={<SearchMoviePage />} />
+            <Route path="/stream" element={<StreamSearchPage />} />
             <Route path="*" element={<Navigate to="/movies" />} />
           </Routes>
         </>
       ) : (
-        <AuthPage />
+        <AuthPage setUser={setUser}/>
       )}
     </main>
   );

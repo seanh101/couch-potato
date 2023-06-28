@@ -1,5 +1,6 @@
 // Search for movies using the OMDB API
 const Movie = require('../../models/movie');
+const fetch = require('node-fetch');
 
 exports.searchMovies = async (req, res) => {
     
@@ -23,37 +24,31 @@ exports.searchMovies = async (req, res) => {
     }
   };
   
-  // Add a movie to favorites
-  exports.addFavoriteMovie = async (req, res) => {
-    const Movie = require('../models/movie');
-    try {
-      const { imdbID, title, plot, length } = req.body;
-      const { user } = req.session;
-  
-      // Check if the movie already exists in favorites for the user
-      const existingMovie = await Movie.findOne({ imdbID, user: user._id });
-      if (existingMovie) {
-        return res.status(400).json({ error: 'Movie already added to favorites' });
-      }
-  
-      // Create a new movie instance with the provided data
-      const newMovie = new Movie({
-        imdbID,
-        title,
-        plot,
-        length,
-        user: user._id,
-      });
-  
-      // Save the movie to the database
-      await newMovie.save();
-  
-      res.status(201).json(newMovie);
-    } catch (error) {
-      console.error('Failed to add movie to favorites', error);
-      res.status(500).json({ error: 'Failed to add movie to favorites' });
-    }
-  };
+ 
+
+// Add a movie to favorites
+exports.addFavoriteMovie = async (req, res) => {
+  try {
+    console.log('r body in afm', req.body)
+    const { imdbID, title, plot, length, poster } = req.body;
+
+    const movie = new Movie({
+      imdbID,
+      title,
+      plot,
+      length,
+      poster,
+      isFavorite: true,
+    });
+
+    await movie.save();
+
+    res.status(201).json(movie);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Failed to add movie to favorites' });
+  }
+};
 
   exports.removeFavoriteMovie = async (req, res) => {
     try {
@@ -68,4 +63,37 @@ exports.searchMovies = async (req, res) => {
       res.status(500).json({ error: 'Failed to remove favorite movie' });
     }
   };
+
+  exports.getFavorites = async (req, res) => {
+    
+          // Retrieve all favorite movies from the database
+          Movie.find({ isFavorite: true })
+            .then((movies) => {
+              res.status(200).json(movies);
+            })
+            .catch((error) => {
+              res.status(500).json({ error: 'Failed to retrieve favorite movies' });
+            });
+       
+  }
+
+  exports.searchStream = async (req, res) => {
+    try {
+      const { searchTerm } = req.query;
+  
+      const response = await fetch(`https://api.watchmode.com/v1/search/?apiKey=zt7rzla8spN0MLB4LQI8TbHoNSKZLJpdFbKxJqPf&type=movie&search_field=name&search_value=${searchTerm}`);
+      const data = await response.json();
+  
+      if (response.ok) {
+        const { results } = data;
+        res.json(results);
+      } else {
+        throw new Error('Failed to search movies');
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to search movies' });
+    }
+  };
+  
+  
   

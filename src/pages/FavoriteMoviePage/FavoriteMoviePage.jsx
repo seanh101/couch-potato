@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './FavoriteMoviePage.css';
 
 const FavoriteMoviePage = () => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
@@ -23,20 +24,22 @@ const FavoriteMoviePage = () => {
   };
 
   return (
-    <div>
+    <div className="favorite-movies-container">
       <h1>Favorite Movies</h1>
       {favoriteMovies.length === 0 ? (
         <p>No favorite movies found.</p>
       ) : (
         <div>
           {favoriteMovies.map((movie) => (
-            <div key={movie._id}>
-              <h2>{movie.title}</h2>
+            <div key={movie._id} className="movie-card">
+              <h2 className="movie-title">{movie.title}</h2>
               <img className="movie-poster" src={movie.poster} alt={movie.title} />
-              <p>Plot: {movie.plot}</p>
-              <p>Length: {movie.length}</p>
-              <p>Is Favorite: {movie.isFavorite ? 'Yes' : 'No'}</p>
-              <button onClick={() => handleToggleFavorite(movie._id)}>Remove from Favorites</button>
+              <p className="movie-details">Plot: {movie.plot}</p>
+              <p className="movie-details">Length: {movie.length}</p>
+              <p className="movie-details">Is Favorite: {movie.isFavorite ? 'Yes' : 'No'}</p>
+              <button className="remove-button" onClick={() => handleToggleFavorite(movie._id)}>
+                Remove from Favorites
+              </button>
             </div>
           ))}
         </div>
@@ -46,6 +49,7 @@ const FavoriteMoviePage = () => {
 };
 
 export default FavoriteMoviePage;
+
 
 
 
