@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './SearchMoviePage.css'; // Import the CSS file
 
-function SearchMoviePage() {
+function SearchMoviePage({user}) {
+  console.log(user);
   const [searchResults, setSearchResults] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
@@ -51,6 +52,7 @@ function SearchMoviePage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          user: user._id,
           imdbID: movie.imdbID,
           title: Title,
           plot: Plot,

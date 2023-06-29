@@ -3,13 +3,14 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const app = express();
 
 // Always require and configure near the top
 require('dotenv').config();
 // Connect to the database
 require('./config/database');
 
-const app = express();
+
 
 app.use(session({
   secret: 'secret',
@@ -26,8 +27,22 @@ app.use(express.json());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Import the Movie model
-const Movie = require('./models/movie');
+app.use((req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (token) {
+    try {
+      const userId = jwt.verify(token, 'SEIRocks!');
+      req.user = userId;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+  next();
+});
+
+
 
 const port = process.env.PORT || 3001;
 
