@@ -1,21 +1,27 @@
 import React, { useState } from 'react';
 
-
-const StreamSearchPage = () => {
+const StreamSearchPage = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
- 
 
   const handleSearch = async (event) => {
-    
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://api.watchmode.com/v1/sources/?apiKey=zt7rzla8spN0MLB4LQI8TbHoNSKZLJpdFbKxJqPf&type=movie&search_field=name&search_value=${searchTerm}`);
+      const response = await fetch(
+        `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchTerm}&country=us&show_type=movie&output_language=en`,
+        {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': 'd7ee4c629emshf758ca58b2f5e36p175e81jsn2d7040bbf526',
+            'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com',
+          },
+        }
+      );
       const data = await response.json();
 
       if (response.ok) {
-        setSearchResults(data);
+        setSearchResults(data.result); // Assuming the movie results are stored in the 'result' array
       } else {
         console.error('Failed to search movies');
       }
@@ -45,19 +51,20 @@ const StreamSearchPage = () => {
         </button>
       </form>
       <div className="search-results">
-        {searchResults.map((data) => (
-          <div key={data.id}>
-            <img src={data.logo_100px}></img>
-            <h2>{data.type}</h2>
-            <h2>Regions: {data.regions.slice(0, 3).join(", ")}</h2>
-
+        {searchResults.map((movie) => (
+          <div key={movie.imdbId}>
+            <h2>{movie.title}</h2>
+            <p>{movie.overview}</p>
           </div>
         ))}
       </div>
     </div>
   );
 };
+
 export default StreamSearchPage;
+
+
 // {/* <div className="search-results">
 // {searchResults.map((movie) => ( */}
 // {/* <div key={movie.imdbID} className="movie">

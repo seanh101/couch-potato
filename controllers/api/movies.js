@@ -11,6 +11,7 @@ exports.searchMovies = async (req, res) => {
       // Make a request to the OMDB API
       const response = await fetch(`http://www.omdbapi.com/?apikey=fa324692&s=${searchTerm}`);
       const data = await response.json();
+      
   
       if (response.ok) {
         const { Search: movies } = data;
@@ -51,15 +52,13 @@ exports.searchMovies = async (req, res) => {
   };
 
   exports.removeFavoriteMovie = async (req, res) => {
+
     try {
       const movieId = req.params.id;
-    //   const userId = req.user.id; // Get the user ID from the authenticated user
-  
-      // Find and remove the movie from the database only if it belongs to the authenticated user
-      await Movie.findOneAndRemove({ _id: movieId, user });
-  
-      // Fetch the updated list of favorite movies for the authenticated user
-      const favoriteMovies = await Movie.find({ isFavorite: true, user });
+      // Find and remove the movie from the database
+      await Movie.findByIdAndRemove(movieId);
+      // Fetch the updated list of favorite movies
+      const favoriteMovies = await Movie.find({ isFavorite: true });
       res.json(favoriteMovies);
     } catch (error) {
       console.error('Error:', error);
@@ -84,24 +83,29 @@ exports.searchMovies = async (req, res) => {
   exports.searchStream = async (req, res) => {
     try {
       const { searchTerm } = req.query;
-      //console.log('searchTerm:', searchTerm);
   
-      const response = await fetch(`https://api.watchmode.com/v1/sources/?apiKey=zt7rzla8spN0MLB4LQI8TbHoNSKZLJpdFbKxJqPf&type=movie&search_field=name&search_value=${searchTerm}`);
-      //console.log('response:', response);
+      const url = `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchTerm}&country=us&show_type=movie&output_language=en`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': 'd7ee4c629emshf758ca58b2f5e36p175e81jsn2d7040bbf526',
+          'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com',
+        },
+      };
+  
+      const response = await fetch(url, options);
       const data = await response.json();
   
       if (response.ok) {
-        // const { results } = data;
+        
         res.json(data);
       } else {
         throw new Error('Failed to search movies');
       }
     } catch (error) {
-      console.error('Failed to search movies', error);
-      res.status(500).json({ error: 'Failed to search movies' });
-    }
-  };
-  
-  
+        console.error('Failed to search movies', error);
+        res.status(500).json({ error: 'Failed to search movies' });
+      }
+    };
   
   
