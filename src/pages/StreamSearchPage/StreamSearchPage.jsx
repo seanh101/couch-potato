@@ -19,6 +19,7 @@ const StreamSearchPage = ({ user }) => {
         }
       );
       const data = await response.json();
+      
 
       if (response.ok) {
         setSearchResults(data.result); // Assuming the movie results are stored in the 'result' array
@@ -33,7 +34,7 @@ const StreamSearchPage = ({ user }) => {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
+  
   return (
     <div className="stream-search-container">
       <h1>Stream Search</h1>
@@ -51,10 +52,25 @@ const StreamSearchPage = ({ user }) => {
         </button>
       </form>
       <div className="search-results">
-        {searchResults.map((movie) => (
-          <div key={movie.imdbId}>
-            <h2>{movie.title}</h2>
-            <p>{movie.overview}</p>
+      {searchResults.map((movie) => (
+    <div key={movie.imdbId}>
+      <h2>{movie.title}</h2>
+      {movie.posterURLs && Object.values(movie.posterURLs)[0] && (
+  <img src={Object.values(movie.posterURLs)[0]} alt="Poster" />
+)}
+
+      <p>{movie.overview}</p>
+      
+      {movie.streamingInfo && movie.streamingInfo.us && (
+  <p>Streaming on: {Object.keys(movie.streamingInfo.us).join(', ')}</p>
+)}
+
+        <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
+      
+      
+
+        
+    
           </div>
         ))}
       </div>
