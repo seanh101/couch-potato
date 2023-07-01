@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './StreamSearchPage.css'
 
 const StreamSearchPage = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,7 +55,7 @@ const StreamSearchPage = ({ user }) => {
       <div className="search-results">
       {searchResults.map((movie) => (
     <div key={movie.imdbId}>
-      <h2>{movie.title}</h2>
+      <h2 class='ff'>{movie.title}</h2>
       {movie.posterURLs && Object.values(movie.posterURLs)[0] && (
   <img src={Object.values(movie.posterURLs)[0]} alt="Poster" />
 )}

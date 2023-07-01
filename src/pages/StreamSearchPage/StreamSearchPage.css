@@ -1,0 +1,41 @@
+.stream-search-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .search-results {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .search-results > div {
+    width: 25%;
+    border: 1px solid red;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .search-results h2 {
+    margin-top: 0;
+  }
+  
+  .search-results img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .search-results p {
+    margin-bottom: 10px;
+  }
+  
+  .search-results a {
+    color: blue;
+    text-decoration: none;
+  }
+  
+  .search-results a:hover {
+    text-decoration: underline;
+  }
+  
