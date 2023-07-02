@@ -6,6 +6,7 @@ function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [shake, setShake] = useState(false);
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -92,9 +93,17 @@ function StreamSearchPage({ user }) {
     }
   };
 
+  const handleButtonClick = () => {
+    setShake(true);
+
+    // Reset the shake state after a delay
+    setTimeout(() => {
+      setShake(false);
+    }, 1000); // Adjust the delay time as needed
+  };
+
   return (
-    <div 
-        className="stream-search-container">
+    <div className="stream-search-container">
         
       <h1>Stream Search</h1>
       <form className="search-form" onSubmit={handleSearch}>
@@ -106,9 +115,12 @@ function StreamSearchPage({ user }) {
           value={searchTerm}
           onChange={handleChange}
         />
-         <button className="search-button" type="submit">
-    <img className="logo" src={logo} alt="Logo" />
-  </button>
+   <div className={`shake ${shake ? 'animated' : ''}`}>
+        <button className="search-button" type="submit" onClick={handleButtonClick}>
+          <img className="logo" src={logo} alt="Logo" />
+        </button>
+      </div>
+
       </form>
       <div className="search-results">
         {searchResults.map((movie) => (
@@ -122,13 +134,14 @@ function StreamSearchPage({ user }) {
                 <p> {Object.keys(movie.streamingInfo.us).join(', ')}</p>
               </div>
             )}
-            {/* Show Plot */}
-            {!movie.showPlot && (
+         {/* Show Plot and Show Cast */}
+       {/* Show Plot */}
+       {!movie.showPlot && (
               <button
                 className="show-plot-button"
                 onClick={() => handleTogglePlot(movie)}
               >
-                Show Plot
+                Details
               </button>
             )}
 
@@ -151,7 +164,7 @@ function StreamSearchPage({ user }) {
                 className="show-cast-button"
                 onClick={() => handleToggleCast(movie)}
               >
-                Show Cast
+                Cast
               </button>
             )}
 
@@ -167,6 +180,7 @@ function StreamSearchPage({ user }) {
                 </button>
               </>
             )}
+
              <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
 
 
@@ -203,17 +217,6 @@ export default StreamSearchPage;
 
 
 
-
-// {/* <div className="search-results">
-// {searchResults.map((movie) => ( */}
-// {/* <div key={movie.imdbID} className="movie">
-//             <h2 className="movie-title">{movie.Title}</h2>
-//             <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
-//             {/* Render additional details */}
-            // {movie.Plot && <p className="movie-details">Plot: {movie.Plot}</p>}
-            // {movie.Runtime && <p className="movie-details">Runtime: {movie.Runtime}</p>}
-            // {movie.Genre && <p className="movie-details">Genre: {movie.Genre}</p>}
-            // <p className="movie-year">Year: {movie.Year}</p> */}
 
 
 

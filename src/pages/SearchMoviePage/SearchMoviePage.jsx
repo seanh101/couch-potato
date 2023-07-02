@@ -81,7 +81,7 @@ console.log(user._id)
       <h1>Search Movies & TV</h1>
       <form className="search-form" onSubmit={handleSearch}>
         <input className="search-input" type="text" name="searchTerm" placeholder="Enter movie title" />
-        <button className="search-button" type="submit">Search</button>
+        <button className="search-button-x" type="submit">Search</button>
       </form>
       {/* Render the search results */}
       <div className="search-results">

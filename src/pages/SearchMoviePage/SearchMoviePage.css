@@ -2,7 +2,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: aquamarine;
     margin: 0;
     padding: 0;
   }
@@ -33,14 +33,14 @@ body {
   button[type="submit"] {
     padding: 8px 16px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: teal;
     color: #fff;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  button[type="submit"]:hover {
+  .search-button-x:hover {
     background-color: #0056b3;
   }
   
