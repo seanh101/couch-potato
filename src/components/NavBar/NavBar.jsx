@@ -11,18 +11,19 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
+    
       <div className="logo-container">
         <Link to="/search">
           <img className="logo" src={logo} alt="Logo" />
         </Link>
       </div>
+      <Link to="/">Home</Link>
+      &nbsp; | &nbsp;
       <Link to="/movies">Favorites</Link>
       &nbsp; | &nbsp;
-      <Link to="/search">Search Movies & TV</Link>
-      &nbsp;&nbsp;
       <Link to="/stream">Stream Availability</Link>
       &nbsp;&nbsp;
-      <span>Welcome, {user.name}</span>
+      <span> {user.name}</span>
       &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>
     </nav>
   );
