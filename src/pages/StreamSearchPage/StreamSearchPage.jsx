@@ -134,8 +134,7 @@ function StreamSearchPage({ user }) {
                 <p> {Object.keys(movie.streamingInfo.us).join(', ')}</p>
               </div>
             )}
-         {/* Show Plot and Show Cast */}
-       {/* Show Plot */}
+      
        {!movie.showPlot && (
               <button
                 className="show-plot-button"
@@ -145,7 +144,7 @@ function StreamSearchPage({ user }) {
               </button>
             )}
 
-            {/* Hide Plot */}
+        
             {movie.showPlot && (
               <>
                 <p>{movie.overview}</p>
@@ -158,7 +157,7 @@ function StreamSearchPage({ user }) {
               </>
             )}
 
-            {/* Show Cast */}
+            
             {!movie.showCast && (
               <button
                 className="show-cast-button"
@@ -168,7 +167,7 @@ function StreamSearchPage({ user }) {
               </button>
             )}
 
-            {/* Hide Cast */}
+           
             {movie.showCast && (
               <>
                 <p>{movie.cast.join(', ')}</p>
