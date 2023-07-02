@@ -1,21 +1,43 @@
-.stream-search-container {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
+.stream-search-container button {
+    background-color: tan; /* Set the background color to tan */
+    color: white; /* Set the text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    
+   
+    
+    
   }
+
+  
   
   .search-results {
-    display: flex;
+    display:flex;
     flex-wrap: wrap;
-   
+    justify-content: center; /* Add this line to center the objects horizontally */
+    align-items: center; 
+    /* Add this line to center the objects vertically */
   }
   
+  
+  
   .search-results > div {
-    width: 25%;
-    border: 1px solid red;
+    flex: 1 0 200px; /* Set a fixed width for each object, adjust the value as needed */
+    border: 1px solid tan;
     padding: 10px;
     box-sizing: border-box;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+  
+ 
   
   .search-results h2 {
     margin-top: 0;
@@ -47,3 +69,75 @@
     font-weight: bold;
     text-transform: capitalize;
   }
+
+ body {
+    background-color: teal;;
+ }
+  
+.search-button {
+    
+}
+
+.stream-search-container button {
+    background-color: tan; /* Set the background color to tan */
+    color: white; /* Set the text color */
+    border: none;
+    padding: 5px 10px; /* Adjust the padding values as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    padding: 5px; /* Adjust the padding values as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+  }
+  
+  .search-button {
+    margin-left: 10px;
+    /* Add some margin between the input and the button */
+  }
+
+  
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    10% {
+      transform: translateX(-10px);
+    }
+    20% {
+      transform: translateX(10px);
+    }
+    30% {
+      transform: translateX(-10px);
+    }
+    40% {
+      transform: translateX(10px);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+    60% {
+      transform: translateX(10px);
+    }
+    70% {
+      transform: translateX(-10px);
+    }
+    80% {
+      transform: translateX(10px);
+    }
+    90% {
+      transform: translateX(-10px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  

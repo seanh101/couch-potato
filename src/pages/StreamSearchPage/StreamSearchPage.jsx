@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './StreamSearchPage.css';
+import logo from './potato3.jpeg'
 
 function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,6 +50,19 @@ function StreamSearchPage({ user }) {
       })
     );
   };
+  const handleToggleCast = (movie) => {
+    setSearchResults((prevResults) =>
+      prevResults.map((prevMovie) => {
+        if (prevMovie.imdbId === movie.imdbId) {
+          return {
+            ...prevMovie,
+            showCast: !prevMovie.showCast,
+          };
+        }
+        return prevMovie;
+      })
+    );
+  };
 
   const handleAddFavorite = async (movie) => {
     const { title, overview, posterURLs } = movie;
@@ -79,7 +93,9 @@ function StreamSearchPage({ user }) {
   };
 
   return (
-    <div className="stream-search-container">
+    <div 
+        className="stream-search-container">
+        
       <h1>Stream Search</h1>
       <form className="search-form" onSubmit={handleSearch}>
         <input
@@ -90,9 +106,9 @@ function StreamSearchPage({ user }) {
           value={searchTerm}
           onChange={handleChange}
         />
-        <button className="search-button" type="submit">
-          Search
-        </button>
+         <button className="search-button" type="submit">
+    <img className="logo" src={logo} alt="Logo" />
+  </button>
       </form>
       <div className="search-results">
         {searchResults.map((movie) => (
@@ -101,7 +117,12 @@ function StreamSearchPage({ user }) {
             {movie.posterURLs && Object.values(movie.posterURLs)[0] && (
               <img src={Object.values(movie.posterURLs)[0]} alt="Poster" />
             )}
-
+    {movie.streamingInfo && movie.streamingInfo.us && (
+              <div className="service">
+                <p> {Object.keys(movie.streamingInfo.us).join(', ')}</p>
+              </div>
+            )}
+            {/* Show Plot */}
             {!movie.showPlot && (
               <button
                 className="show-plot-button"
@@ -110,13 +131,46 @@ function StreamSearchPage({ user }) {
                 Show Plot
               </button>
             )}
-            {movie.showPlot && <p>{movie.overview}</p>}
 
-            {movie.streamingInfo && movie.streamingInfo.us && (
-              <div className="service">
-                <p> {Object.keys(movie.streamingInfo.us).join(', ')}</p>
-              </div>
+            {/* Hide Plot */}
+            {movie.showPlot && (
+              <>
+                <p>{movie.overview}</p>
+                <button
+                  className="hide-plot-button"
+                  onClick={() => handleTogglePlot(movie)}
+                >
+                  Hide Plot
+                </button>
+              </>
             )}
+
+            {/* Show Cast */}
+            {!movie.showCast && (
+              <button
+                className="show-cast-button"
+                onClick={() => handleToggleCast(movie)}
+              >
+                Show Cast
+              </button>
+            )}
+
+            {/* Hide Cast */}
+            {movie.showCast && (
+              <>
+                <p>{movie.cast.join(', ')}</p>
+                <button
+                  className="hide-cast-button"
+                  onClick={() => handleToggleCast(movie)}
+                >
+                  Hide Cast
+                </button>
+              </>
+            )}
+             <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
+
+
+
 
             <button
               className={`favorite-button ${

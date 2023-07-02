@@ -3,9 +3,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f8f8f8;
+    background-color: tan;
     padding: 10px 20px;
-    height: 80px; /* Adjust the height as desired */
+    height: 80px; 
+    border-bottom: aliceblue;
+    border-bottom-style:groove;
   }
   
   .logo-container {
