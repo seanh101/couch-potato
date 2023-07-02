@@ -1,7 +1,8 @@
 // we need a base path that we can use to refer our requests to the location of our routes
 import sendRequest from './send-request';
 import * as usersAPI from './users-api';
-const BASE_URL = '/api/users'
+const BASE_URL = 'https://couch-potato-api.onrender.com/api/users'
+//const BASE_URL = '/api/users'
 
 
 export function signUp(userData) {
