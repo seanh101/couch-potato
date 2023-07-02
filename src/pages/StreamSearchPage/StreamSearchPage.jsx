@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './StreamSearchPage.css'
+import './StreamSearchPage.css';
 
-const StreamSearchPage = ({ user }) => {
+function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -20,10 +21,9 @@ const StreamSearchPage = ({ user }) => {
         }
       );
       const data = await response.json();
-      
 
       if (response.ok) {
-        setSearchResults(data.result); // Assuming the movie results are stored in the 'result' array
+        setSearchResults(data.result);
       } else {
         console.error('Failed to search movies');
       }
@@ -35,7 +35,49 @@ const StreamSearchPage = ({ user }) => {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  
+
+  const handleTogglePlot = (movie) => {
+    setSearchResults((prevResults) =>
+      prevResults.map((prevMovie) => {
+        if (prevMovie.imdbId === movie.imdbId) {
+          return {
+            ...prevMovie,
+            showPlot: !prevMovie.showPlot,
+          };
+        }
+        return prevMovie;
+      })
+    );
+  };
+
+  const handleAddFavorite = async (movie) => {
+    const { title, overview, posterURLs } = movie;
+
+    try {
+      const response = await fetch('/api/movies/favorites', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: user._id,
+          title,
+          plot: overview,
+          poster: Object.values(posterURLs)[0],
+        }),
+      });
+
+      if (response.ok) {
+        const addedMovie = await response.json();
+        setFavoriteMovies((prevFavorites) => [...prevFavorites, addedMovie]);
+      } else {
+        console.error('Failed to add movie to favorites');
+      }
+    } catch (error) {
+      console.error('Failed to add movie to favorites', error);
+    }
+  };
+
   return (
     <div className="stream-search-container">
       <h1>Stream Search</h1>
@@ -53,33 +95,59 @@ const StreamSearchPage = ({ user }) => {
         </button>
       </form>
       <div className="search-results">
-      {searchResults.map((movie) => (
-    <div key={movie.imdbId}>
-      <h2 class='ff'>{movie.title}</h2>
-      {movie.posterURLs && Object.values(movie.posterURLs)[0] && (
-  <img src={Object.values(movie.posterURLs)[0]} alt="Poster" />
-)}
+        {searchResults.map((movie) => (
+          <div key={movie.imdbId}>
+            <h2 className="ff">{movie.title}</h2>
+            {movie.posterURLs && Object.values(movie.posterURLs)[0] && (
+              <img src={Object.values(movie.posterURLs)[0]} alt="Poster" />
+            )}
 
-      <p>{movie.overview}</p>
-      
-      {movie.streamingInfo && movie.streamingInfo.us && (
-  <p>Streaming on: {Object.keys(movie.streamingInfo.us).join(', ')}</p>
-)}
+            {!movie.showPlot && (
+              <button
+                className="show-plot-button"
+                onClick={() => handleTogglePlot(movie)}
+              >
+                Show Plot
+              </button>
+            )}
+            {movie.showPlot && <p>{movie.overview}</p>}
 
-        <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
-      
-      
+            {movie.streamingInfo && movie.streamingInfo.us && (
+              <div className="service">
+                <p> {Object.keys(movie.streamingInfo.us).join(', ')}</p>
+              </div>
+            )}
 
-        
-    
+            <button
+              className={`favorite-button ${
+                favoriteMovies.some((favMovie) => favMovie.title === movie.title)
+                  ? 'favorited'
+                  : ''
+              }`}
+              onClick={() => handleAddFavorite(movie)}
+              disabled={favoriteMovies.some((favMovie) => favMovie.title === movie.title)}
+            >
+              {favoriteMovies.some((favMovie) => favMovie.title === movie.title)
+                ? 'Added to Favorites'
+                : 'Add Favorite'}
+            </button>
           </div>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default StreamSearchPage;
+
+
+
+
+
+
+
+
+
 
 
 // {/* <div className="search-results">

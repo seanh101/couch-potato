@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
-
+const usersCtrl = require('../../controllers/api/users');
 const bcrypt = require('bcrypt');
 
 module.exports = {
   create,
   login,
+  checkToken,
 };
 
 
@@ -42,5 +43,11 @@ function createJWT(user) {
     process.env.SECRET,
     { expiresIn: '24h' }
   );
+}
+
+function checkToken(req, res) {
+  // req.user will always be there for you when a token is sent
+  console.log('req.user', req.user);
+  res.json(req.exp);
 }
 

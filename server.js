@@ -9,6 +9,7 @@ const app = express();
 require('dotenv').config();
 // Connect to the database
 require('./config/database');
+app.use(require('./config/checkToken'));
 
 
 

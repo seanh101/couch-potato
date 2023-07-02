@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import './SearchMoviePage.css'; // Import the CSS file
 
-function SearchMoviePage({user}) {
-  console.log(user);
+
+
+
+function SearchMoviePage({ user, setUser }) {
   const [searchResults, setSearchResults] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   const handleSearch = async (event) => {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
-
+console.log(user._id)
     // Make a request to the OMDB API
     const response = await fetch(`http://www.omdbapi.com/?apikey=fa324692&s=${searchTerm}`);
     const data = await response.json();
@@ -52,17 +54,18 @@ function SearchMoviePage({user}) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user: user._id,
+          user: user._id, // Pass the user ID
           imdbID: movie.imdbID,
           title: Title,
           plot: Plot,
           length: Runtime,
-          poster: Poster, // Add the movie poster to the request body
+          poster: Poster,
         }),
       });
   
       if (response.ok) {
-        setFavoriteMovies((prevFavorites) => [...prevFavorites, movie]);
+        const addedMovie = await response.json();
+        setFavoriteMovies((prevFavorites) => [...prevFavorites, addedMovie]);
       } else {
         console.error('Failed to add movie to favorites');
       }
@@ -70,6 +73,7 @@ function SearchMoviePage({user}) {
       console.error('Failed to add movie to favorites', error);
     }
   };
+  
   
 
   return (
