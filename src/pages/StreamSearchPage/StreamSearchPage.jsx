@@ -69,7 +69,7 @@ function StreamSearchPage({ user }) {
     const { title, overview, posterURLs } = movie;
 
     try {
-      const response = await fetch('/api/movies/favorites', {
+      const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

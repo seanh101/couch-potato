@@ -6,7 +6,7 @@ const FavoriteMoviePage = () => {
 
   useEffect(() => {
     // Fetch favorite movies from the server
-    fetch('/api/movies/favorites')
+    fetch('https://couch-potato-api.onrender.com/api/movies/favorites')
       .then((response) => response.json())
       .then((data) => setFavoriteMovies(data))
       .catch((error) => console.error('Error:', error));
@@ -14,7 +14,7 @@ const FavoriteMoviePage = () => {
 
   const handleToggleFavorite = (movieId) => {
     // Send a request to the server to remove the movie from favorites
-    fetch(`/api/movies/favorites/${movieId}`, { method: 'DELETE' })
+    fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}`, { method: 'DELETE' })
       .then((response) => response.json())
       .then((data) => {
         // Update the favorite movies list
