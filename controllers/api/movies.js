@@ -22,6 +22,7 @@ exports.searchMovies = async (req, res) => {
 };
 
 exports.addFavoriteMovie = async (req, res) => {
+    console.log('this is req.body',req.body)
   try {
     const { imdbID, title, plot, length, poster, user } = req.body;
     const movie = new Movie({
