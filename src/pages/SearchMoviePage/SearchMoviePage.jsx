@@ -48,7 +48,7 @@ console.log(user._id)
     const { Title, Plot, Runtime, Poster } = movie;
   
     try {
-      const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites/api/movies/favorites', {
+      const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
