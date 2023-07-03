@@ -1,36 +1,58 @@
 import React, { useEffect, useState } from 'react';
 import './FavoriteMoviePage.css';
 
-const FavoriteMoviePage = () => {
+const FavoriteMoviePage = ({ user }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
   useEffect(() => {
-    // Fetch favorite movies from the server
-    fetch('https://couch-potato-api.onrender.com/api/movies/favorites')
-      .then((response) => response.json())
-      .then((data) => setFavoriteMovies(data))
-      .catch((error) => console.error('Error:', error));
+    const fetchFavorites = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`https://couch-potato-api.onrender.com/api/movies/favorites`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const favorites = await response.json();
+          setFavoriteMovies(favorites);
+        } else {
+          console.error('Failed to fetch favorite movies');
+        }
+      } catch (error) {
+        console.error('Failed to fetch favorite movies', error);
+      }
+    };
+
+    fetchFavorites();
   }, []);
 
   const handleToggleFavorite = (movieId) => {
-    // Send a request to the server to remove the movie from favorites
-    fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}`, { method: 'DELETE' })
+    const token = localStorage.getItem('token');
+    fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((data) => {
-        // Update the favorite movies list
         setFavoriteMovies(data);
       })
       .catch((error) => console.error('Error:', error));
   };
 
+  const filteredFavoriteMovies = favoriteMovies.filter((movie) => movie.user === user._id);
+
   return (
     <div className="favorite-movies-container">
       <h1>Favorite Movies</h1>
-      {favoriteMovies.length === 0 ? (
+      {filteredFavoriteMovies.length === 0 ? (
         <p>No favorite movies found.</p>
       ) : (
         <div>
-          {favoriteMovies.map((movie) => (
+          {filteredFavoriteMovies.map((movie) => (
             <div key={movie._id} className="movie-card">
               <h2 className="movie-title">{movie.title}</h2>
               <img className="movie-poster" src={movie.poster} alt={movie.title} />
@@ -49,6 +71,8 @@ const FavoriteMoviePage = () => {
 };
 
 export default FavoriteMoviePage;
+
+
 
 
 

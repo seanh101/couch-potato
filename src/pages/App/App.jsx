@@ -19,8 +19,8 @@ export default function App() {
           <NavBar user={user} />
           <Routes>
             <Route path="/" element={<HomePage />} /> 
-            <Route path="/movies" element={<FavoriteMoviePage />} />
-            <Route path="/search" element={<SearchMoviePage user={user} />} />
+            <Route path="/movies" element={<FavoriteMoviePage user={user} />} />
+            <Route path="/search" element={<SearchMoviePage user={user}  />} />
             <Route path="/stream" element={<StreamSearchPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

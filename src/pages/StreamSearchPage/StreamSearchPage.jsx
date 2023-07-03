@@ -5,7 +5,7 @@ import logo from './potato3.jpeg'
 function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [favoriteMovies, setFavoriteMovies] = useState([]);
+  // const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [shake, setShake] = useState(false);
 
   const handleSearch = async (event) => {
@@ -65,33 +65,33 @@ function StreamSearchPage({ user }) {
     );
   };
 
-  const handleAddFavorite = async (movie) => {
-    const { title, overview, posterURLs } = movie;
+//   const handleAddFavorite = async (movie) => {
+//     const { title, overview, posterURLs } = movie;
 
-    try {
-      const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user: user._id,
-          title,
-          plot: overview,
-          poster: Object.values(posterURLs)[0],
-        }),
-      });
+//     try {
+//       const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           user: user._id,
+//           title,
+//           plot: overview,
+//           poster: Object.values(posterURLs)[0],
+//         }),
+//       });
 
-      if (response.ok) {
-        const addedMovie = await response.json();
-        setFavoriteMovies((prevFavorites) => [...prevFavorites, addedMovie]);
-      } else {
-        console.error('Failed to add movie to favorites');
-      }
-    } catch (error) {
-      console.error('Failed to add movie to favorites', error);
-    }
-  };
+//       if (response.ok) {
+//         const addedMovie = await response.json();
+//         setFavoriteMovies((prevFavorites) => [...prevFavorites, addedMovie]);
+//       } else {
+//         console.error('Failed to add movie to favorites');
+//       }
+//     } catch (error) {
+//       console.error('Failed to add movie to favorites', error);
+//     }
+//   };
 
   const handleButtonClick = () => {
     setShake(true);
@@ -185,7 +185,7 @@ function StreamSearchPage({ user }) {
 
 
 
-            <button
+            {/* <button
               className={`favorite-button ${
                 favoriteMovies.some((favMovie) => favMovie.title === movie.title)
                   ? 'favorited'
@@ -197,7 +197,7 @@ function StreamSearchPage({ user }) {
               {favoriteMovies.some((favMovie) => favMovie.title === movie.title)
                 ? 'Added to Favorites'
                 : 'Add Favorite'}
-            </button>
+            </button> */}
           </div>
         ))}
       </div>

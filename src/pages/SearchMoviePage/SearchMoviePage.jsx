@@ -4,7 +4,7 @@ import './SearchMoviePage.css'; // Import the CSS file
 
 
 
-function SearchMoviePage({ user, setUser }) {
+function SearchMoviePage({ user }) {
   const [searchResults, setSearchResults] = useState([]);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
 
@@ -45,6 +45,7 @@ console.log(user._id)
   };
 
   const handleAddFavorite = async (movie) => {
+    
     const { Title, Plot, Runtime, Poster } = movie;
   
     try {

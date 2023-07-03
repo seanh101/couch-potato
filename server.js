@@ -23,10 +23,6 @@ app.use(session({
 app.use(logger('dev'));
 app.use(express.json());
 
-// Configure both serve-favicon & static middleware
-// to serve from the production 'build' folder
-// app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
-// app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(cors({
   origin: ['http://localhost:3000', 'https://couch-potato.onrender.com']
