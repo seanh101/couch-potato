@@ -60,9 +60,13 @@ app.use('/api/movies', require('./routes/api/movies'));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX/API requests
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.send('nothing found here');
 });
+
 
 app.listen(port, function() {
   console.log(`Express app running on port ${port}`);
