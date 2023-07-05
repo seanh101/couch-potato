@@ -1,13 +1,14 @@
 const session = require('express-session');
 const express = require('express');
-const path = require('path');
+
 
 const logger = require('morgan');
 const app = express();
 const cors = require('cors');
-// Always require and configure near the top
+
 require('dotenv').config();
-// Connect to the database
+const jwt = require('jsonwebtoken');
+
 require('./config/database');
 app.use(require('./config/checkToken'));
 
@@ -17,7 +18,7 @@ app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: false,
-  // Other session options...
+
 }));
 
 app.use(logger('dev'));
@@ -47,18 +48,14 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 3001;
 
-// Put API routes here, before the "catch all" route
+
 app.use('/api/users', require('./routes/api/users'));
 
 
 
 app.use('/api/movies', require('./routes/api/movies'));
 
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX/API requests
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+
 app.get('/*', function(req, res) {
   res.send('nothing found here');
 });

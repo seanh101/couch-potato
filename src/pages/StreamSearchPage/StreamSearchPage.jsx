@@ -5,7 +5,7 @@ import logo from './potato3.jpeg'
 function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  // const [favoriteMovies, setFavoriteMovies] = useState([]);
+  //const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [shake, setShake] = useState(false);
 
   const handleSearch = async (event) => {

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const reviewSchema = new mongoose.Schema(
   {
     imdbId: {
-      type: string,
+      type: String,
       required: true,
     },
     userId: {
@@ -14,10 +14,6 @@ const reviewSchema = new mongoose.Schema(
     },
     body: {
       type: String,
-      required: true,
-    },
-    title: {
-      type: string,
       required: true,
     },
   },

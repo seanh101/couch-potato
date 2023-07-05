@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SearchMoviePage.css'; // Import the CSS file
-
+import { getToken } from '../../utilities/users-service';
 
 
 
@@ -11,7 +11,6 @@ function SearchMoviePage({ user }) {
   const handleSearch = async (event) => {
     event.preventDefault();
     const searchTerm = event.target.elements.searchTerm.value;
-console.log(user._id)
     // Make a request to the OMDB API
     const response = await fetch(`http://www.omdbapi.com/?apikey=fa324692&s=${searchTerm}`);
     const data = await response.json();
@@ -23,6 +22,7 @@ console.log(user._id)
         movies.map(async (movie) => {
           const movieResponse = await fetch(`http://www.omdbapi.com/?apikey=fa324692&i=${movie.imdbID}`);
           const movieData = await movieResponse.json();
+          console.log('this is movie data: ', movieData)
           if (movieResponse.ok) {
             const { Plot, Runtime, Genre } = movieData;
             return {
@@ -35,7 +35,9 @@ console.log(user._id)
             console.error('Failed to fetch movie details');
             return movie;
           }
+          
         })
+        
       );
       // Set the updated search results in the component state
       setSearchResults(updatedMovies);
@@ -45,22 +47,19 @@ console.log(user._id)
   };
 
   const handleAddFavorite = async (movie) => {
-    
-    const { Title, Plot, Runtime, Poster } = movie;
-  
     try {
       const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${getToken()}`,
         },
         body: JSON.stringify({
-          user: user._id, // Pass the user ID
           imdbID: movie.imdbID,
-          title: Title,
-          plot: Plot,
-          length: Runtime,
-          poster: Poster,
+          title: movie.Title,
+          plot: movie.Plot,
+          length: movie.Runtime,
+          poster: movie.Poster,
         }),
       });
   
@@ -97,7 +96,7 @@ console.log(user._id)
             <p className="movie-year">Year: {movie.Year}</p>
             <button
               className={`favorite-button ${favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID) ? 'favorited' : ''}`}
-              onClick={() => handleAddFavorite(movie)}
+              onClick={() => handleAddFavorite(movie, user)}
               disabled={favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)}
             >
               {favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)
@@ -108,7 +107,9 @@ console.log(user._id)
         ))}
       </div>
     </div>
+    
   );
+ 
 }
 
 export default SearchMoviePage;
