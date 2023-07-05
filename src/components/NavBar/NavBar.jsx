@@ -13,7 +13,7 @@ export default function NavBar({ user, setUser }) {
     <nav>
     
       <div className="logo-container">
-        <Link to="/search">
+        <Link to="/stream">
           <img className="logo" src={logo} alt="Logo" />
         </Link>
       </div>
@@ -21,7 +21,9 @@ export default function NavBar({ user, setUser }) {
       &nbsp; | &nbsp;
       <Link to="/movies">Favorites</Link>
       &nbsp; | &nbsp;
-      <Link to="/stream">Stream Availability</Link>
+      <Link to="/search">Search Film & TV</Link>
+      &nbsp; | &nbsp;
+      <Link to="/stream">Stream Search</Link>
       &nbsp;&nbsp;
       <span> {user.name}</span>
       &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>
