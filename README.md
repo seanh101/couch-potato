@@ -4,28 +4,29 @@ Couch Potato is a full-stack, single-page application that allows users to disco
 
 ## Screenshot(s)
 
-Landing Page
-<img src='public/homepage.png'>
+- Landing Page
+<img src='public/homepage1.png'>
 
-Search Streams Page
+- Search Streams Page
 <img src='public/stream.png'>
 
-Search Movies Page
+- Search Movies Page
 <img src='public/searchmovie.png'>
 
-Favorite Movies Page
+- Favorite Movies Page
 <img src='public/favorites.png'>
 
 ## Technologies Used
-MongoDB/Mongoose
-Express
-React
-Node
-watchmode API
-themovienight API
-Render
-Javascript 
-CSS
+
+- MongoDB/Mongoose
+- Express
+- React
+- Node
+- watchmode API
+- themovienight API
+- Render
+- Javascript 
+- CSS
 
 
 ## Getting Started
@@ -36,7 +37,7 @@ CSS
 
 ## Next Steps
 
-Here are some planned future enhancements for Couch Potato:
+- Here are some planned future enhancements for Couch Potato:
 
     - Social features to enable users to share movie recommendations and watchlists with friends.
     - Enhanced search functionality, including filters and sorting options.
