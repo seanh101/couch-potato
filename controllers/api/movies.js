@@ -171,4 +171,25 @@ exports.addReview = async (req, res) => {
       res.status(500).json({ error: 'Failed to remove review' });
     }
   };
+
+ exports.rateMovie = async (req, res) => {
+    try {
+      const movie = await Movie.findById(req.params.id);
+      
+      if (!movie) {
+        return res.status(404).json({ error: 'Movie not found' });
+      }
+      
+      const { rating } = req.body;
+      movie.rating = rating;
+      
+      await movie.save();
+      
+      res.json({ message: 'Movie rated successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+  
   

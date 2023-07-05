@@ -3,6 +3,7 @@ import './FavoriteMoviePage.css';
 
 const FavoriteMoviePage = ({ user }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
+  const [rating, setRating] = useState('');
   // const [reviewBody, setReviewBody] = useState('');
 
   useEffect(() => {
@@ -67,6 +68,41 @@ const FavoriteMoviePage = ({ user }) => {
   //   }
   // };
 
+  const handleRate = async (movieId, rating) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}/rate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ rating }),
+      });
+      
+      if (response.ok) {
+        // Update the movie rating in the state
+        const updatedMovies = favoriteMovies.map(movie => {
+          if (movie._id === movieId) {
+            return {
+              ...movie,
+              rating: rating
+            };
+          }
+          return movie;
+        });
+        setFavoriteMovies(updatedMovies);
+
+        console.log('Movie rated successfully');
+      } else {
+        console.error('Failed to rate movie');
+      }
+    } catch (error) {
+      console.error('Failed to rate movie', error);
+    }
+  };
+  
+
   return (
     <div className="favorite-movies-container">
       <h1>Favorite Movies</h1>
@@ -78,10 +114,10 @@ const FavoriteMoviePage = ({ user }) => {
             <div key={movie._id} className="movie-card">
               <h2 className="movie-title">{movie.title}</h2>
               <img className="movie-poster" src={movie.poster} alt={movie.title} />
-              <p className="movie-details">Plot: {movie.plot}</p>
-              <p className="movie-details">Length: {movie.length}</p>
-              <p className="movie-details">Is Favorite: {movie.isFavorite ? 'Yes' : 'No'}</p>
-              {movie.reviews && movie.reviews.length > 0 && (
+              <p className="movie-details">{movie.plot}</p>
+              <p className="movie-details"> {movie.length}</p>
+             
+              {/* {movie.reviews && movie.reviews.length > 0 && (
                 <div className="movie-reviews">
                   <h3>Reviews</h3>
                   {movie.reviews.map((review) => (
@@ -90,7 +126,20 @@ const FavoriteMoviePage = ({ user }) => {
                     </p>
                   ))}
                 </div>
-              )}
+              
+              )} */}
+          <input
+                type="number"
+                className="rating-input"
+                placeholder="Rate the movie (1-5)"
+                min={1}
+                max={5}
+                onChange={(e) => setRating(e.target.value)}
+              />
+              <button className="rate-button" onClick={() => handleRate(movie._id, rating)}>
+                Rate
+              </button>
+
               <div className="movie-actions">
                 <button
                   className="toggle-favorite-button"
