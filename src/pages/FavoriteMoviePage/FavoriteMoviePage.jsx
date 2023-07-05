@@ -3,7 +3,7 @@ import './FavoriteMoviePage.css';
 
 const FavoriteMoviePage = ({ user }) => {
   const [favoriteMovies, setFavoriteMovies] = useState([]);
-  const [reviewBody, setReviewBody] = useState('');
+  // const [reviewBody, setReviewBody] = useState('');
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -44,28 +44,28 @@ const FavoriteMoviePage = ({ user }) => {
       .catch((error) => console.error('Error:', error));
   };
 
-  const handleAddReview = async (movieId, reviewBody) => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}/reviews`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ body: reviewBody }), // Pass the review body in the request body
-      });
+  // const handleAddReview = async (movieId, reviewBody) => {
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     const response = await fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}/reviews`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ body: reviewBody }), // Pass the review body in the request body
+  //     });
 
-      if (response.ok) {
-        const updatedMovies = await response.json();
-        setFavoriteMovies(updatedMovies);
-      } else {
-        console.error('Failed to add review');
-      }
-    } catch (error) {
-      console.error('Failed to add review', error);
-    }
-  };
+  //     if (response.ok) {
+  //       const updatedMovies = await response.json();
+  //       setFavoriteMovies(updatedMovies);
+  //     } else {
+  //       console.error('Failed to add review');
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to add review', error);
+  //   }
+  // };
 
   return (
     <div className="favorite-movies-container">
