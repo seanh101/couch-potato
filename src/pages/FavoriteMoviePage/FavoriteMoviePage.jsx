@@ -98,7 +98,7 @@ const FavoriteMoviePage = ({ user }) => {
                 >
                   {movie.isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
                 </button>
-                <input
+                {/* <input
                   type="text"
                   className="review-input"
                   placeholder="Add a review"
@@ -109,7 +109,7 @@ const FavoriteMoviePage = ({ user }) => {
                   onClick={() => handleAddReview(movie._id, reviewBody)}
                 >
                   Add Review
-                </button>
+                </button> */}
               </div>
             </div>
           ))}

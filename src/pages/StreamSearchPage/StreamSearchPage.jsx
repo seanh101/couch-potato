@@ -126,12 +126,12 @@ function StreamSearchPage({ user }) {
         {searchResults.map((movie) => (
           <div key={movie.imdbId}>
             <h2 className="ff">{movie.title}</h2>
-            {movie.posterURLs && Object.values(movie.posterURLs)[0] && (
-              <img src={Object.values(movie.posterURLs)[0]} alt="Poster" />
+            {movie.posterURLs && Object.values(movie.posterURLs)[1] && (
+              <img src={Object.values(movie.posterURLs)[1]} alt="Poster" />
             )}
     {movie.streamingInfo && movie.streamingInfo.us && (
               <div className="service">
-                <p> {Object.keys(movie.streamingInfo.us).join(', ')}</p>
+                <h4> {Object.keys(movie.streamingInfo.us).join(', ')}</h4>
               </div>
             )}
       
