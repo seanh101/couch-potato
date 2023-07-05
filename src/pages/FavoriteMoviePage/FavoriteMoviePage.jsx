@@ -71,7 +71,7 @@ const FavoriteMoviePage = ({ user }) => {
   const handleRate = async (movieId, rating) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}/rate`, {
+      const response = await fetch(`https://couch-potato-api.onrender.com/api/movies/favorites/${movieId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ const FavoriteMoviePage = ({ user }) => {
           <input
                 type="number"
                 className="rating-input"
-                placeholder="Rate the movie (1-5)"
+                placeholder=""
                 min={1}
                 max={5}
                 onChange={(e) => setRating(e.target.value)}

@@ -64,11 +64,8 @@ function StreamSearchPage({ user }) {
     );
   };
 
-
   const handleButtonClick = () => {
     setShake(true);
-
-  
     setTimeout(() => {
       setShake(false);
     }, 1000); // Adjust the delay time as needed
@@ -87,7 +84,7 @@ function StreamSearchPage({ user }) {
           value={searchTerm}
           onChange={handleChange}
         />
-   <div className={`shake ${shake ? 'animated' : ''}`}>
+      <div className={`shake ${shake ? 'animated' : ''}`}>
         <button className="search-button" type="submit" onClick={handleButtonClick}>
           <img className="logo" src={logo} alt="Logo" />
         </button>
@@ -116,7 +113,6 @@ function StreamSearchPage({ user }) {
               </button>
             )}
 
-        
             {movie.showPlot && (
               <>
                 <p>{movie.overview}</p>
@@ -138,7 +134,6 @@ function StreamSearchPage({ user }) {
                 Cast
               </button>
             )}
-
             {movie.showCast && (
               <>
                 <p>{movie.cast.join(', ')}</p>

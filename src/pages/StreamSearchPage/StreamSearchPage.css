@@ -8,8 +8,6 @@
     text-transform: uppercase;
     cursor: pointer;
   }
-
-  
   
   .search-results {
     display:flex;
@@ -18,8 +16,6 @@
     align-items: center; 
     /* Add this line to center the objects vertically */
   }
-  
-  
   
   .search-results > div {
     flex: 1 0 200px; /* Set a fixed width for each object, adjust the value as needed */
@@ -32,8 +28,6 @@
     justify-content: center;
     align-items: center;
   }
-  
- 
   
   .search-results h2 {
     margin-top: 0;
@@ -65,19 +59,11 @@
     font-weight: bold;
     text-transform: capitalize;
     
-    
   }
 
  body {
     background-color: teal;;
  }
-  
-
-
-
-
-
-
   
   .search-form {
     display: flex;
@@ -116,12 +102,6 @@
     display: flex;
     margin-top: 10px; /* Add margin as needed */
   }
-  
-
-  
-  
-  
-
 
   
   @keyframes shake {
@@ -149,7 +129,7 @@
     animation-iteration-count: 1;
     
   }
-  
+
   /* Styles for mobile screens */
 @media (max-width: 767px) {
     .stream-search-container button {

@@ -1,13 +1,10 @@
 const Movie = require('../../models/movie');
 const fetch = require('node-fetch');
-const Review = require('../../models/review');
+
 
 exports.searchMovies = async (req, res) => {
-
   try {
     const { searchTerm } = req.query;
-
-    // Make a request to the OMDB API
     const response = await fetch(`http://www.omdbapi.com/?apikey=fa324692&s=${searchTerm}`);
     const data = await response.json();
 
@@ -26,8 +23,7 @@ exports.searchMovies = async (req, res) => {
 exports.addFavoriteMovie = async (req, res) => {
     try {
       const { imdbID, title, plot, length, poster } = req.body;
-      const user = req.user; // Get the authenticated user from req.user
-  
+      const user = req.user; 
       const existingMovie = await Movie.findOne({ imdbID, user });
   
       if (existingMovie) {
@@ -42,7 +38,7 @@ exports.addFavoriteMovie = async (req, res) => {
           length,
           poster,
           isFavorite: true,
-          user: user, // Assign the user ID to the movie's user field
+          user: user,
         });
   
         await movie.save();
@@ -54,17 +50,14 @@ exports.addFavoriteMovie = async (req, res) => {
       res.status(500).json({ error: 'Failed to add movie to favorites' });
     }
   };
-  
 
   exports.removeFavoriteMovie = async (req, res) => {
     try {
       const movieId = req.params.id;
-      const user = req.user; // Get the authenticated user from req.user
+      const user = req.user; 
   
-      // Find and remove the movie only if it belongs to the authenticated user
       await Movie.findOneAndRemove({ _id: movieId, user: user._id });
   
-      // Fetch the updated list of favorite movies for the user
       const favoriteMovies = await Movie.find({ user: user._id, isFavorite: true });
       res.json(favoriteMovies);
     } catch (error) {
@@ -77,7 +70,6 @@ exports.getFavorites = async (req, res) => {
     try {
       const userId = req.user._id;
   
-      // Retrieve favorite movies for the authenticated user only
       const favoriteMovies = await Movie.find({ user: userId, isFavorite: true });
   
       res.status(200).json(favoriteMovies);
@@ -87,9 +79,6 @@ exports.getFavorites = async (req, res) => {
     }
   };
   
-  
-  
-
 exports.searchStream = async (req, res) => {
   try {
     const { searchTerm } = req.query;
@@ -117,79 +106,33 @@ exports.searchStream = async (req, res) => {
   }
 };
 
-exports.addReview = async (req, res) => {
-    try {
-      const { movieId } = req.params;
-      const { title, body } = req.body;
-      const user = req.user; // Get the authenticated user from req.user
-  
-      const movie = await Movie.findOne({ _id: movieId, user });
-  
-      if (!movie) {
-        return res.status(404).json({ error: 'Movie not found' });
-      }
-  
-      const review = new Review({
-        title,
-        body,
-        movie: movieId,
-        user: user._id,
-      });
-  
-      await review.save();
-  
-      movie.reviews.push(review._id);
-      await movie.save();
-  
-      res.status(201).json({ review, movie });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Failed to add review' });
-    }
-  };
-  
-  exports.removeReview = async (req, res) => {
-    try {
-      const { reviewId } = req.params;
-      const user = req.user; // Get the authenticated user from req.user
-  
-      const review = await Review.findOne({ _id: reviewId, user });
-  
-      if (!review) {
-        return res.status(404).json({ error: 'Review not found' });
-      }
-  
-      await review.remove();
-  
-      const movie = await Movie.findOne({ _id: review.movie });
-      movie.reviews.pull(review._id);
-      await movie.save();
-  
-      res.status(200).json({ review, movie });
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: 'Failed to remove review' });
-    }
-  };
+exports.rateMovie = async (req, res) => {
+  try {
+    const movie = await Movie.findById(req.params.id);
 
- exports.rateMovie = async (req, res) => {
-    try {
-      const movie = await Movie.findById(req.params.id);
-      
-      if (!movie) {
-        return res.status(404).json({ error: 'Movie not found' });
-      }
-      
-      const { rating } = req.body;
-      movie.rating = rating;
-      
-      await movie.save();
-      
-      res.json({ message: 'Movie rated successfully' });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Internal server error' });
+    if (!movie) {
+      return res.status(404).json({ error: 'Movie not found' });
     }
+
+    const { rating } = req.body;
+    const userId = req.user.id; // Assuming you have user authentication middleware
+
+    // Create a new rating object that includes the user and the rating value
+    const newRating = {
+      user: userId,
+      rating: rating,
+    };
+
+    movie.ratings.push(newRating); // Assuming 'ratings' is an array field in the movie model
+
+    await movie.save();
+
+    res.json({ message: 'Movie rated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
   }
+};
+
   
   

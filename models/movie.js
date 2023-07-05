@@ -13,7 +13,10 @@ const movieSchema = new mongoose.Schema({
   plot: { type: String },
   length: { type: String },
   isFavorite: { type: Boolean, default: false },
-  reviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }], // Add a reviews field to store review references
+  rating: {
+    type: Number,
+    default: 0,
+  }, 
 });
 
 movieSchema.methods.toggleFavorite = function () {

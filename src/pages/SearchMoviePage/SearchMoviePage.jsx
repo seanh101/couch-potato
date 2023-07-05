@@ -34,11 +34,9 @@ function SearchMoviePage({ user }) {
             console.error('Failed to fetch movie details');
             return movie;
           }
-          
         })
-        
       );
-      // Set the updated search results in the component state
+  
       setSearchResults(updatedMovies);
     } else {
       console.error('Failed to search movies');

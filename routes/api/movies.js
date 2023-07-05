@@ -8,6 +8,7 @@ router.get('/stream', movieController.searchStream);
 
 router.post('/favorites', movieController.addFavoriteMovie);
 router.delete('/favorites/:id', movieController.removeFavoriteMovie);
+router.post('/favorites/:id', movieController.rateMovie);
 
 module.exports = router;
 

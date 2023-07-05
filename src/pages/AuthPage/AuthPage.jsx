@@ -19,7 +19,10 @@ export default function AuthPage({ setUser }) {
       <button onClick={handlePref}>
         { userPref === 'signup' ? 'Already a member? Log In' : 'Need an Account? Sign Up'}
       </button>
+      <p>User info can be name: xxx, email: xxx@xxx.com, pword:xxx </p>
     </div>
+
+    
   );
 }
 
