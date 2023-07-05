@@ -5,7 +5,6 @@ import logo from './potato3.jpeg'
 function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  //const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [shake, setShake] = useState(false);
 
   const handleSearch = async (event) => {
@@ -65,38 +64,11 @@ function StreamSearchPage({ user }) {
     );
   };
 
-//   const handleAddFavorite = async (movie) => {
-//     const { title, overview, posterURLs } = movie;
-
-//     try {
-//       const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           user: user._id,
-//           title,
-//           plot: overview,
-//           poster: Object.values(posterURLs)[0],
-//         }),
-//       });
-
-//       if (response.ok) {
-//         const addedMovie = await response.json();
-//         setFavoriteMovies((prevFavorites) => [...prevFavorites, addedMovie]);
-//       } else {
-//         console.error('Failed to add movie to favorites');
-//       }
-//     } catch (error) {
-//       console.error('Failed to add movie to favorites', error);
-//     }
-//   };
 
   const handleButtonClick = () => {
     setShake(true);
 
-    // Reset the shake state after a delay
+  
     setTimeout(() => {
       setShake(false);
     }, 1000); // Adjust the delay time as needed
@@ -129,13 +101,13 @@ function StreamSearchPage({ user }) {
             {movie.posterURLs && Object.values(movie.posterURLs)[1] && (
               <img src={Object.values(movie.posterURLs)[1]} alt="Poster" />
             )}
-    {movie.streamingInfo && movie.streamingInfo.us && (
-              <div className="service">
-                <h4> {Object.keys(movie.streamingInfo.us).join(', ')}</h4>
-              </div>
+            {movie.streamingInfo && movie.streamingInfo.us && (
+          <div className="service">
+            <h4> {Object.keys(movie.streamingInfo.us).join(', ')}</h4>
+          </div>
             )}
       
-       {!movie.showPlot && (
+          {!movie.showPlot && (
               <button
                 className="show-plot-button"
                 onClick={() => handleTogglePlot(movie)}
@@ -167,7 +139,6 @@ function StreamSearchPage({ user }) {
               </button>
             )}
 
-           
             {movie.showCast && (
               <>
                 <p>{movie.cast.join(', ')}</p>
@@ -179,25 +150,7 @@ function StreamSearchPage({ user }) {
                 </button>
               </>
             )}
-
              <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
-
-
-
-
-            {/* <button
-              className={`favorite-button ${
-                favoriteMovies.some((favMovie) => favMovie.title === movie.title)
-                  ? 'favorited'
-                  : ''
-              }`}
-              onClick={() => handleAddFavorite(movie)}
-              disabled={favoriteMovies.some((favMovie) => favMovie.title === movie.title)}
-            >
-              {favoriteMovies.some((favMovie) => favMovie.title === movie.title)
-                ? 'Added to Favorites'
-                : 'Add Favorite'}
-            </button> */}
           </div>
         ))}
       </div>

@@ -17,7 +17,6 @@ function SearchMoviePage({ user }) {
 
     if (response.ok) {
       const { Search: movies } = data;
-      // Fetch additional details for new search results
       const updatedMovies = await Promise.all(
         movies.map(async (movie) => {
           const movieResponse = await fetch(`http://www.omdbapi.com/?apikey=fa324692&i=${movie.imdbID}`);
@@ -83,13 +82,11 @@ function SearchMoviePage({ user }) {
         <input className="search-input" type="text" name="searchTerm" placeholder="Enter movie title" />
         <button className="search-button-x" type="submit">Search</button>
       </form>
-      {/* Render the search results */}
       <div className="search-results">
         {searchResults.map((movie) => (
           <div key={movie.imdbID} className="movie">
             <h2 className="movie-title">{movie.Title}</h2>
             <img className="movie-poster" src={movie.Poster} alt={movie.Title} />
-            {/* Render additional details */}
             {movie.Plot && <p className="movie-details">Plot: {movie.Plot}</p>}
             {movie.Runtime && <p className="movie-details">Runtime: {movie.Runtime}</p>}
             {movie.Genre && <p className="movie-details">Genre: {movie.Genre}</p>}
