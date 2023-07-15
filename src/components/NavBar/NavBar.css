@@ -1,38 +1,52 @@
 /* CSS for NavBar */
 nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: tan;
-    padding: 10px 20px;
-    height: 80px; 
-    border-bottom: aliceblue;
-    border-bottom-style:groove;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: tan;
+  padding: 10px 20px;
+  height: 80px;
+  border-bottom: aliceblue;
+  border-bottom-style: groove;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 75px; /* Adjust the logo height as desired */
+  width: auto;
+  margin-right: 10px; /* Add margin as desired */
+}
+
+/* Additional CSS styles for the rest of the NavBar elements */
+nav a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 10px; /* Add margin as desired */
+}
+
+nav span {
+  margin-right: 10px; /* Add margin as desired */
+}
+
+nav a:last-child {
+  margin-right: 0;
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
   .logo-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    height: 75px; /* Adjust the logo height as desired */
-    width: auto;
     margin-right: 10px; /* Add margin as desired */
   }
   
-  /* Additional CSS styles for the rest of the NavBar elements */
+  nav {
+    justify-content: center; /* Center the elements */
+  }
+  
   nav a {
-    color: #333;
-    text-decoration: none;
-    margin-right: 10px; /* Add margin as desired */
+    font-size: 14px; /* Adjust the font size as desired */
   }
-  
-  nav span {
-    margin-right: 10px; /* Add margin as desired */
-  }
-  
-  nav a:last-child {
-    margin-right: 0;
-  }
-  
+}
