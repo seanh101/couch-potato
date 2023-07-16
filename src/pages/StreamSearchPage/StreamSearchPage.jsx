@@ -12,7 +12,7 @@ function StreamSearchPage({ user }) {
 
     try {
       const response = await fetch(
-        `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchTerm}&country=us&show_type=movie&output_language=en`,
+        `https://streaming-availability.p.rapidapi.com/v2/search/title?title=${searchTerm}&country=us&output_language=en`,
         {
           method: 'GET',
           headers: {
