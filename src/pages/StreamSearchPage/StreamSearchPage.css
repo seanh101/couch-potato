@@ -20,7 +20,7 @@
   .search-results > div {
     flex: 1 1 200px; /* Change flex property to 1 1 200px */
     max-width: 200px; /* Add max-width property */
-    border: 3px solid var(--orange); /* Change border-color to var(--orange) */
+    border: 3px solid tan; /* Change border-color to var(--orange) */
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
@@ -28,7 +28,7 @@
     flex-direction: column;
     justify-content: space-between; /* Change justify-content to space-between */
     align-items: center;
-    background-color: tan;
+    background-color: white;
   }
   
   
@@ -107,7 +107,7 @@
     margin-top: 10px; /* Add margin as needed */
   }
 
-h1 {
+h3 {
   color: white;
 }
   

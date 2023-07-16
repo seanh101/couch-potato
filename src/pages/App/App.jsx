@@ -7,7 +7,7 @@ import FavoriteMoviePage from '../FavoriteMoviePage/FavoriteMoviePage';
 import StreamSearchPage from '../StreamSearchPage/StreamSearchPage';
 import NavBar from '../../components/NavBar/NavBar';
 import { useState } from 'react';
-import HomePage from '../HomePage/HomePage';
+//import HomePage from '../HomePage/HomePage';
 
 
 
@@ -18,7 +18,7 @@ export default function App() {
     <main className="App">
       <NavBar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<StreamSearchPage />} />
         {user && (
           <>
             <Route path="/movies" element={<FavoriteMoviePage user={user} />} />

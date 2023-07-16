@@ -74,7 +74,7 @@ function StreamSearchPage({ user }) {
   return (
     <div className="stream-search-container">
         
-      <h1>Stream Search</h1>
+      <h3>Search Streams</h3>
       <form className="search-form" onSubmit={handleSearch}>
         <input
           className="search-input"
