@@ -21,14 +21,21 @@ nav {
   margin-right: 10px; /* Add margin as desired */
 }
 
-/* Additional CSS styles for the rest of the NavBar elements */
+.app-title {
+  flex: 1; /* Take up remaining space */
+  text-align: center; /* Center the app title */
+  margin-right: 75px; /* Add margin to account for the logo width */
+  font-family: 'Tektur', cursive; /* Specify the 'Tektur' font */
+  font-weight: bold; /* Make the app title bold */
+  font-size: 28px; /* Set the font size to a larger value */
+  color: white; /* Set the font color to white */
+  text-shadow: -2px -2px teal, 2px -2px teal, -2px 2px teal, 2px 2px teal; /* Set the outline */
+  padding: 8px 16px; /* Add padding to the app title */
+}
+
 nav a {
   color: #333;
   text-decoration: none;
-  margin-right: 10px; /* Add margin as desired */
-}
-
-nav span {
   margin-right: 10px; /* Add margin as desired */
 }
 
@@ -49,4 +56,13 @@ nav a:last-child {
   nav a {
     font-size: 14px; /* Adjust the font size as desired */
   }
+  
+  .app-title {
+    flex: 1; /* Take up remaining space */
+    text-align: center; /* Center the app title */
+    margin-right: 0; /* Remove the margin added for the logo width */
+  }
 }
+
+
+

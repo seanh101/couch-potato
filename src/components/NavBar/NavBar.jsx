@@ -16,8 +16,7 @@ export default function NavBar({ user, setUser }) {
           <img className="logo" src={logo} alt="Logo" />
         </Link>
       </div>
-      <Link to="/">Home</Link>
-      &nbsp; | &nbsp;
+      <span className="app-title">COUCH POTATO</span>
       {user && (
         <>
           <Link to="/movies">Favorites</Link>
@@ -25,8 +24,6 @@ export default function NavBar({ user, setUser }) {
           <Link to="/search">Search Film & TV</Link>
         </>
       )}
-      &nbsp; | &nbsp;
-      <Link to="/stream">Stream Search</Link>
       {user && (
         <>
           &nbsp;&nbsp;
@@ -38,3 +35,5 @@ export default function NavBar({ user, setUser }) {
     </nav>
   );
 }
+
+
