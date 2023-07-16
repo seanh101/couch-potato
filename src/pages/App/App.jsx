@@ -9,6 +9,8 @@ import NavBar from '../../components/NavBar/NavBar';
 import { useState } from 'react';
 import HomePage from '../HomePage/HomePage';
 
+
+
 export default function App() {
   const [user, setUser] = useState(getUser());
 
@@ -24,7 +26,7 @@ export default function App() {
           </>
         )}
         <Route path="/stream" element={<StreamSearchPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/stream" />} />
       </Routes>
     </main>
   );

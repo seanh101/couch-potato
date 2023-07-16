@@ -145,6 +145,8 @@ function StreamSearchPage({ user }) {
                 </button>
               </>
             )}
+            {movie.imdbRating && <p className='rating'>IMDb Rating: {movie.imdbRating}%</p>}
+
              <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
           </div>
         ))}

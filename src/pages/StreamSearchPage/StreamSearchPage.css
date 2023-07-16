@@ -18,17 +18,20 @@
   }
   
   .search-results > div {
-    flex: 1 0 200px; /* Set a fixed width for each object, adjust the value as needed */
-    border: 1px solid tan;
+    flex: 1 1 200px; /* Change flex property to 1 1 200px */
+    max-width: 200px; /* Add max-width property */
+    border: 3px solid var(--orange); /* Change border-color to var(--orange) */
     padding: 10px;
     box-sizing: border-box;
     margin: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Change justify-content to space-between */
     align-items: center;
     background-color: tan;
   }
+  
+  
   
   .search-results h2 {
     margin-top: 0;
@@ -103,6 +106,9 @@
     display: flex;
     margin-top: 10px; /* Add margin as needed */
   }
+
+
+  
 
   
   @keyframes shake {
