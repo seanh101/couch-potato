@@ -72,7 +72,7 @@
  .search-form {
   display: flex;
   align-items: center;
-  margin: 0 20%; /* Add the same margins as the app description */
+  margin: 20px 20%; /* Increase the top and bottom margin */
 }
 
 .search-input {
