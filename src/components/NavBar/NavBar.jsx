@@ -9,6 +9,10 @@ export default function NavBar({ user, setUser }) {
     setUser(null);
   }
 
+  function handleTitleClick() {
+    window.location.reload();
+  }
+
   return (
     <nav>
       <div className="logo-container">
@@ -16,7 +20,7 @@ export default function NavBar({ user, setUser }) {
           <img className="logo" src={logo} alt="Logo" />
         </Link>
       </div>
-      <span className="app-title">COUCH POTATO</span>
+      <Link to="/" className="app-title" onClick={handleTitleClick}>COUCH POTATO</Link>
       {user && (
         <>
           <Link to="/movies">Favorites</Link>
@@ -35,5 +39,7 @@ export default function NavBar({ user, setUser }) {
     </nav>
   );
 }
+
+
 
 
