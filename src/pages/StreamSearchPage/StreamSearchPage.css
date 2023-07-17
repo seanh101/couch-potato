@@ -69,38 +69,38 @@
     background-color: teal;;
  }
   
-  .search-form {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-input {
-    padding: 5px; /* Adjust the padding values as needed */
-    font-size: 14px; /* Adjust the font size as needed */
-  }
-  
-  .search-button {
-    margin-left: 0; /* Remove the margin on the left */
-    /* Add any additional margin or padding as needed */
-   
-    border: none;
-    padding: 0;
-    
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .search-button img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-style: solid;
-    border: tan solid;
-    border-width: thick;
-     /* Add this line to maintain the aspect ratio of the image */
-  }
+ .search-form {
+  display: flex;
+  align-items: center;
+  margin: 0 20%; /* Add the same margins as the app description */
+}
+
+.search-input {
+  padding: 5px; /* Adjust the padding values as needed */
+  font-size: 14px; /* Adjust the font size as needed */
+  flex: 1; /* Allow the input to grow and fill the available space */
+}
+
+.search-button {
+  border: none;
+  padding: 0;
+  height: 40px; /* Decrease the height to match the input */
+  width: 40px; /* Set a fixed width for the button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; /* Remove the background color */
+}
+
+.search-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-style: solid;
+  border: tan solid;
+  border-width: thick;
+}
+
   
   .button-container {
     display: flex;
