@@ -110,8 +110,20 @@
 h3 {
   color: white;
 }
-  
+.app-description {
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  margin: 0 20%;
+  border: 3px dashed tan;
+}
 
+.api-credit {
+  color: white;
+  font-size: 0.7em;
+  text-align: center;
+  margin: 0 20%;
+}
   
   @keyframes shake {
     0% {
@@ -139,15 +151,14 @@ h3 {
     
   }
 
-  /* Styles for mobile screens */
-@media (max-width: 767px) {
+  @media (max-width: 767px) {
     .stream-search-container button {
       padding: 3px 6px;
       font-size: 12px;
     }
     
     .search-results > div {
-      flex-basis: 100%; /* Set full width for each object */
+      flex-basis: 100%;
     }
     
     .search-results p {
@@ -164,6 +175,15 @@ h3 {
     
     .button-container {
       flex-direction: column;
+    }
+    
+    .app-description {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .api-credit {
+      font-size: 0.7em; /* Adjust the font size to half */
+      margin-bottom: 15px;
     }
   }
   
@@ -194,5 +214,13 @@ h3 {
       flex-direction: row;
       margin-top: 10px;
     }
+    
+    .app-description {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .api-credit {
+      font-size: 0.5em; /* Adjust the font size to half */
+      margin-bottom: 20px;
+    }
   }
-  

@@ -74,7 +74,7 @@ function StreamSearchPage({ user }) {
   return (
     <div className="stream-search-container">
         
-      <h3>Search Streams</h3>
+      <h3>Movie & TV Stream Finder</h3>
       <form className="search-form" onSubmit={handleSearch}>
         <input
           className="search-input"
@@ -89,8 +89,19 @@ function StreamSearchPage({ user }) {
           <img className="logo" src={logo} alt="Logo" />
         </button>
       </div>
-
       </form>
+      {searchResults.length === 0 && (
+      <div className="app-description">
+        <p>Trying to watch a movie or show and can't find where it's streaming? Couch Potato has you covered</p>
+        <p>Couch Potato is a movie and TV show search engine that allows you to find out which services are streaming a certain movie or show.</p>
+        <p>You'll also be able to view the plot details, cast, Imdb rating, and a clickable youtube trailer. Enjoy!</p>
+      </div>
+    )}
+       {searchResults.length === 0 && (
+      <div className="api-credit">
+        <p>Made with Movie of the Night API (TMDB API)</p>
+      </div>
+    )}
       <div className="search-results">
         {searchResults.map((movie) => (
           <div key={movie.imdbId}>

@@ -26,7 +26,7 @@ export default function App() {
           </>
         )}
         <Route path="/stream" element={<StreamSearchPage />} />
-        <Route path="*" element={<Navigate to="/stream" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </main>
   );
