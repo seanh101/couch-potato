@@ -1,5 +1,7 @@
 # Couch Potato
 
+*** has been updated for better usability. README updates to come soon
+
 Couch Potato is a full-stack, single-page application that allows users to discover new movies, find out where they're streaming, and save their favorite movies to watch later. With Couch Potato, you can easily explore a wide range of movies and keep track of your personal watchlist.
 
 ## Screenshot(s)
