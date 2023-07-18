@@ -24,14 +24,15 @@ nav {
 .app-title {
   flex: 1; /* Take up remaining space */
   text-align: center; /* Center the app title */
-  margin-right: 75px; /* Add margin to account for the logo width */
   font-family: 'Tektur', cursive; /* Specify the 'Tektur' font */
   font-weight: bold; /* Make the app title bold */
   font-size: 28px; /* Set the font size to a larger value */
   color: white; /* Set the font color to white */
   text-shadow: -2px -2px teal, 2px -2px teal, -2px 2px teal, 2px 2px teal; /* Set the outline */
   padding: 8px 16px; /* Add padding to the app title */
+  width: 100%; /* Extend the div to the full width of the navbar */
 }
+
 
 nav a {
   color: #333;

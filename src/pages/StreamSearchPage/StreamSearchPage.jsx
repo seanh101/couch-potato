@@ -11,6 +11,7 @@ import paramountPlusLogo from './paramount-plus-logo.png';
 import appleTVPlusLogo from './apple-tv-plus-logo.png';
 import starzLogo from './starz-logo.png';
 import showtimeLogo from './showtime-logo.png';
+import logo1 from './potato2.jpeg'
 
 const streamingServiceLogos = {
   netflix: netflixLogo,
@@ -110,6 +111,7 @@ function StreamSearchPage({ user }) {
 
   return (
     <div className="stream-search-container">
+      <img className="logo" src={logo1} alt="Logo" />
       <h3>Movie & TV Stream Finder</h3>
       <form className="search-form" onSubmit={handleSearch}>
         <input

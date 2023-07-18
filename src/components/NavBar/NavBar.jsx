@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
-import logo from './potato2.jpeg';
+
 import './NavBar.css';
 
 export default function NavBar({ user, setUser }) {
@@ -15,12 +15,9 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
-      <div className="logo-container">
-        <Link to="/stream">
-          <img className="logo" src={logo} alt="Logo" />
-        </Link>
-      </div>
+     
       <Link to="/" className="app-title" onClick={handleTitleClick}>COUCH POTATO</Link>
+     
       {user && (
         <>
           <Link to="/movies">Favorites</Link>

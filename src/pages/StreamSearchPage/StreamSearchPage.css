@@ -1,3 +1,7 @@
+.stream-search-container {
+  text-align: center;
+  margin: 20px;
+}
 .stream-search-container button {
   color: white;
   border: none;
