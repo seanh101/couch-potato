@@ -1,6 +1,43 @@
 import React, { useState } from 'react';
 import './StreamSearchPage.css';
-import logo from './potato3.jpeg'
+import logo from './potato3.jpeg';
+import netflixLogo from './netflix-logo.png';
+import primeVideoLogo from './prime-video-logo.png';
+import disneyPlusLogo from './disney-plus-logo.png';
+import hboMaxLogo from './hbo-max-logo.png';
+import huluLogo from './hulu-logo.png';
+import peacockLogo from './peacock-logo.png';
+import paramountPlusLogo from './paramount-plus-logo.png';
+import appleTVPlusLogo from './apple-tv-plus-logo.png';
+import starzLogo from './starz-logo.png';
+import showtimeLogo from './showtime-logo.png';
+
+
+
+const streamingServiceLogos = {
+  netflix: netflixLogo,
+  'Amazon Prime Video': primeVideoLogo,
+  'Disney+': disneyPlusLogo,
+  'HBO Max': hboMaxLogo,
+  hulu: huluLogo,
+  Peacock: peacockLogo,
+  'Paramount+': paramountPlusLogo,
+  'Apple TV+': appleTVPlusLogo,
+  Starz: starzLogo,
+  Showtime: showtimeLogo,
+};
+
+const streamingServiceNames = {
+  apple: 'Apple TV+',
+  prime: 'Amazon Prime Video',
+  paramount: 'Paramount+',
+  hbo: 'HBO Max',
+  hulu: 'hulu',
+  netflix: 'netflix',
+  peacock: 'Peacock',
+  starz: 'Starz',
+  showtime: 'Showtime',
+};
 
 function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -110,9 +147,24 @@ function StreamSearchPage({ user }) {
               <img src={Object.values(movie.posterURLs)[1]} alt="Poster" />
             )}
             {movie.streamingInfo && movie.streamingInfo.us && (
-          <div className="service">
-            <h4> {Object.keys(movie.streamingInfo.us).join(', ')}</h4>
-          </div>
+        <div className="service">
+        {Object.keys(movie.streamingInfo.us).length > 0 && (
+          <h4 className="streaming-on">Streaming on:</h4>
+        )}
+        {Object.keys(movie.streamingInfo.us)
+          .filter((service) => service !== 'Starz' && service !== 'Showtime')
+          .map((service) => {
+            const serviceName = streamingServiceNames[service.toLowerCase()] || service;
+            return (
+              <img
+                key={serviceName}
+                src={streamingServiceLogos[serviceName]}
+                alt={serviceName}
+                className="service-logo"
+              />
+            );
+          })}
+      </div>
             )}
       
           {!movie.showPlot && (
