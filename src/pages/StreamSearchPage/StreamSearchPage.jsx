@@ -37,6 +37,7 @@ const streamingServiceNames = {
   peacock: 'Peacock',
   starz: 'Starz',
   showtime: 'Showtime',
+  disney: 'Disney+',
 };
 
 function StreamSearchPage({ user }) {
