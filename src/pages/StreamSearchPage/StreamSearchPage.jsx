@@ -12,8 +12,6 @@ import appleTVPlusLogo from './apple-tv-plus-logo.png';
 import starzLogo from './starz-logo.png';
 import showtimeLogo from './showtime-logo.png';
 
-
-
 const streamingServiceLogos = {
   netflix: netflixLogo,
   'Amazon Prime Video': primeVideoLogo,
@@ -32,8 +30,8 @@ const streamingServiceNames = {
   prime: 'Amazon Prime Video',
   paramount: 'Paramount+',
   hbo: 'HBO Max',
-  hulu: 'hulu',
-  netflix: 'netflix',
+  hulu: 'Hulu',
+  netflix: 'Netflix',
   peacock: 'Peacock',
   starz: 'Starz',
   showtime: 'Showtime',
@@ -111,7 +109,6 @@ function StreamSearchPage({ user }) {
 
   return (
     <div className="stream-search-container">
-        
       <h3>Movie & TV Stream Finder</h3>
       <form className="search-form" onSubmit={handleSearch}>
         <input
@@ -122,96 +119,83 @@ function StreamSearchPage({ user }) {
           value={searchTerm}
           onChange={handleChange}
         />
-      <div className={`shake ${shake ? 'animated' : ''}`}>
-        <button className="search-button" type="submit" onClick={handleButtonClick}>
-          <img className="logo" src={logo} alt="Logo" />
-        </button>
-      </div>
+        <div className={`shake ${shake ? 'animated' : ''}`}>
+          <button className="search-button" type="submit" onClick={handleButtonClick}>
+            <img className="logo" src={logo} alt="Logo" />
+          </button>
+        </div>
       </form>
       {searchResults.length === 0 && (
-      <div className="app-description">
-        <p>Trying to watch a movie or show and can't find where it's streaming? Couch Potato has you covered</p>
-        <p>Couch Potato is a movie and TV show search engine that allows you to find out which services are streaming a certain movie or show.</p>
-        <p>You'll also be able to view the plot details, cast, Imdb rating, and a clickable youtube trailer. Enjoy!</p>
-      </div>
-    )}
-       {searchResults.length === 0 && (
-      <div className="api-credit">
-        <p>Made with Movie of the Night API (TMDB API)</p>
-      </div>
-    )}
+        <div className="app-description">
+          <p>Trying to watch a movie or show and can't find where it's streaming? Couch Potato has you covered.</p>
+          <p>Couch Potato is a movie and TV show search engine that allows you to find out which services are streaming a certain movie or show.</p>
+          <p>You'll also be able to view the plot details, cast, IMDb rating, and a clickable YouTube trailer. Enjoy!</p>
+        </div>
+      )}
+      {searchResults.length === 0 && (
+        <div className="api-credit">
+          <p>Made with Movie of the Night API (TMDB API)</p>
+        </div>
+      )}
       <div className="search-results">
         {searchResults.map((movie) => (
-          <div key={movie.imdbId}>
+          <div key={movie.imdbId} className="result-container">
             <h2 className="ff">{movie.title}</h2>
             {movie.posterURLs && Object.values(movie.posterURLs)[1] && (
               <img src={Object.values(movie.posterURLs)[1]} alt="Poster" />
             )}
             {movie.streamingInfo && movie.streamingInfo.us && (
-        <div className="service">
-        {Object.keys(movie.streamingInfo.us).length > 0 && (
-          <h4 className="streaming-on">Streaming on:</h4>
-        )}
-        {Object.keys(movie.streamingInfo.us)
-          .filter((service) => service !== 'Starz' && service !== 'Showtime')
-          .map((service) => {
-            const serviceName = streamingServiceNames[service.toLowerCase()] || service;
-            return (
-              <img
-                key={serviceName}
-                src={streamingServiceLogos[serviceName]}
-                alt={serviceName}
-                className="service-logo"
-              />
-            );
-          })}
-      </div>
-            )}
-      
-          {!movie.showPlot && (
-              <button
-                className="show-plot-button"
-                onClick={() => handleTogglePlot(movie)}
-              >
-                Details
-              </button>
+              <div className="service">
+                {Object.keys(movie.streamingInfo.us).length > 0 && <h4 className="streaming-on">Streaming on:</h4>}
+                {Object.keys(movie.streamingInfo.us)
+                  .filter((service) => service !== 'Starz' && service !== 'Showtime')
+                  .map((service) => {
+                    const serviceName = streamingServiceNames[service.toLowerCase()] || service;
+                    return (
+                      <img
+                        key={serviceName}
+                        src={streamingServiceLogos[serviceName]}
+                        alt={serviceName}
+                        className="service-logo"
+                      />
+                    );
+                  })}
+              </div>
             )}
 
-            {movie.showPlot && (
+            {!movie.showPlot ? (
+              <button className="show-plot-button" onClick={() => handleTogglePlot(movie)}>
+                Details
+              </button>
+            ) : (
               <>
                 <p>{movie.overview}</p>
-                <button
-                  className="hide-plot-button"
-                  onClick={() => handleTogglePlot(movie)}
-                >
+                <button className="hide-plot-button" onClick={() => handleTogglePlot(movie)}>
                   Hide Plot
                 </button>
               </>
             )}
 
-            
-            {!movie.showCast && (
-              <button
-                className="show-cast-button"
-                onClick={() => handleToggleCast(movie)}
-              >
+            {!movie.showCast ? (
+              <button className="show-cast-button" onClick={() => handleToggleCast(movie)}>
                 Cast
               </button>
-            )}
-            {movie.showCast && (
+            ) : (
               <>
                 <p>{movie.cast.join(', ')}</p>
-                <button
-                  className="hide-cast-button"
-                  onClick={() => handleToggleCast(movie)}
-                >
+                <button className="hide-cast-button" onClick={() => handleToggleCast(movie)}>
                   Hide Cast
                 </button>
               </>
             )}
-            {movie.imdbRating && <p className='rating'>IMDb Rating: {movie.imdbRating}%</p>}
 
-             <p><a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">Watch Trailer</a></p>
+            {movie.imdbRating && <p className="rating">IMDb Rating: {movie.imdbRating}%</p>}
+
+            <p>
+              <a href={movie.youtubeTrailerVideoLink} target="_blank" rel="noopener noreferrer">
+                Watch Trailer
+              </a>
+            </p>
           </div>
         ))}
       </div>
@@ -220,17 +204,3 @@ function StreamSearchPage({ user }) {
 }
 
 export default StreamSearchPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
