@@ -43,6 +43,7 @@ function StreamSearchPage({ user }) {
   const [searchResults, setSearchResults] = useState([]);
   const [shake, setShake] = useState(false);
 
+
   const handleSearch = async (event) => {
     event.preventDefault();
 
@@ -146,20 +147,20 @@ function StreamSearchPage({ user }) {
             )}
             {movie.streamingInfo && movie.streamingInfo.us && (
               <div className="service">
-                {Object.keys(movie.streamingInfo.us).length > 0 && <h4 className="streaming-on">Streaming on:</h4>}
-                {Object.keys(movie.streamingInfo.us)
-                  .filter((service) => service !== 'Starz' && service !== 'Showtime')
-                  .map((service) => {
-                    const serviceName = streamingServiceNames[service.toLowerCase()] || service;
-                    return (
-                      <img
-                        key={serviceName}
-                        src={streamingServiceLogos[serviceName]}
-                        alt={serviceName}
-                        className="service-logo"
-                      />
-                    );
-                  })}
+                {Object.keys(movie.streamingInfo.us).length > 0 &&
+                  Object.keys(movie.streamingInfo.us)
+                    .filter((service) => service !== 'Starz' && service !== 'Showtime')
+                    .map((service) => {
+                      const serviceName = streamingServiceNames[service.toLowerCase()] || service;
+                      return (
+                        <img
+                          key={serviceName}
+                          src={streamingServiceLogos[serviceName]}
+                          alt={serviceName}
+                          className="service-logo"
+                        />
+                      );
+                    })}
               </div>
             )}
 
