@@ -14,25 +14,15 @@ export default function App() {
 
   return (
     <main className="App">
-      {user ? (
-        <>
-          <NavBar  />
-          <Routes>
-            <Route path="/" element={<HomePage />} /> 
-            <Route path="/movies" element={<FavoriteMoviePage user={user} />} />
-            <Route path="/search" element={<SearchMoviePage user={user}  />} />
-            <Route path="/stream" element={<StreamSearchPage />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </>
-      ) : (
-        <AuthPage setUser={setUser}/>
-      )}
+      <NavBar user={user} setUser={setUser} />
+      <Routes>
+        <Route path="/" element={<HomePage />} /> 
+        <Route path="/movies" element={<FavoriteMoviePage user={user} />} />
+        <Route path="/search" element={<SearchMoviePage user={user}  />} />
+        <Route path="/stream" element={<StreamSearchPage />} />
+        <Route path="/auth" element={<AuthPage setUser={setUser} />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </main>
   );
 }
-
-
-
-
-

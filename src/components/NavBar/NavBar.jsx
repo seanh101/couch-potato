@@ -11,7 +11,6 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav>
-    
       <div className="logo-container">
         <Link to="/stream">
           <img className="logo" src={logo} alt="Logo" />
@@ -25,11 +24,17 @@ export default function NavBar({ user, setUser }) {
       &nbsp; | &nbsp;
       <Link to="/stream">Stream Search</Link>
       &nbsp;&nbsp;
-      <span> {user.name}</span>
-      &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>
+      {user ? (
+        <>
+          <span> {user.name}</span>
+          &nbsp;&nbsp;
+          <Link to="" onClick={handleLogOut}>Log Out</Link>
+        </>
+      ) : (
+        <>
+          <Link to="/auth">Sign Up / Log In</Link>
+        </>
+      )}
     </nav>
   );
 }
-
-
-
