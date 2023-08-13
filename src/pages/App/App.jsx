@@ -16,7 +16,7 @@ export default function App() {
     <main className="App">
       {user ? (
         <>
-          <NavBar user={user} />
+          <NavBar  />
           <Routes>
             <Route path="/" element={<HomePage />} /> 
             <Route path="/movies" element={<FavoriteMoviePage user={user} />} />
