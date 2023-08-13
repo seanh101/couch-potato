@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const movieSchema = new mongoose.Schema({
+const movieSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -12,6 +12,8 @@ const movieSchema = new mongoose.Schema({
   poster: { type: String },
   plot: { type: String },
   length: { type: String },
+  cast: [{ type: String }],
+  overview: { type: String },
   isFavorite: { type: Boolean, default: false },
   rating: {
     type: Number,

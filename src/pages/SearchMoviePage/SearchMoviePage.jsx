@@ -90,14 +90,14 @@ function SearchMoviePage({ user }) {
             {movie.Genre && <p className="movie-details">Genre: {movie.Genre}</p>}
             <p className="movie-year">Year: {movie.Year}</p>
             <button
-              className={`favorite-button ${favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID) ? 'favorited' : ''}`}
-              onClick={() => handleAddFavorite(movie, user)}
-              disabled={favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)}
-            >
-              {favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)
-                ? 'Added to Favorites'
-                : 'Add Favorite'}
-            </button>
+      className={`favorite-button ${favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbId) ? 'favorited' : ''}`}
+      onClick={() => handleAddFavorite(movie)}
+      disabled={favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbId)}
+    >
+      {favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbId)
+        ? 'Added to Favorites'
+        : 'Add Favorite'}
+    </button>
           </div>
         ))}
       </div>

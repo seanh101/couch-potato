@@ -12,6 +12,7 @@ import appleTVPlusLogo from './apple-tv-plus-logo.png';
 import starzLogo from './starz-logo.png';
 import showtimeLogo from './showtime-logo.png';
 import logo1 from './potato2.jpeg'
+// import { getToken } from '../../utilities/users-service';
 
 const streamingServiceLogos = {
   netflix: netflixLogo,
@@ -43,6 +44,7 @@ function StreamSearchPage({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [shake, setShake] = useState(false);
+  // const [favoriteMovies, setFavoriteMovies] = useState([]);
 
 
   const handleSearch = async (event) => {
@@ -108,6 +110,36 @@ function StreamSearchPage({ user }) {
       setShake(false);
     }, 1000); // Adjust the delay time as needed
   };
+
+  // const handleAddFavorite = async (movie) => {
+  //   try {
+  //     const response = await fetch('https://couch-potato-api.onrender.com/api/movies/favorites', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${getToken()}`,
+  //       },
+  //       body: JSON.stringify({
+  //         imdbID: movie.imdbID,
+  //         title: movie.Title,
+  //         plot: movie.Plot,
+  //         length: movie.Runtime,
+  //         poster: movie.Poster,
+  //       }),
+  //     });
+  
+  //     if (response.ok) {
+  //       const addedMovie = await response.json();
+  //       setFavoriteMovies((prevFavorites) => [...prevFavorites, addedMovie]);
+  //     } else {
+  //       console.error('Failed to add movie to favorites');
+  //     }
+  //   } catch (error) {
+  //     console.error('Failed to add movie to favorites', error);
+  //   }
+  // };
+  
+
 
   return (
     <div className="stream-search-container">
@@ -199,6 +231,15 @@ function StreamSearchPage({ user }) {
                 Watch Trailer
               </a>
             </p>
+            {/* <button
+              className={`favorite-button ${favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID) ? 'favorited' : ''}`}
+              onClick={() => handleAddFavorite(movie, user)}
+              disabled={favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)}
+            >
+              {favoriteMovies.some((favMovie) => favMovie.imdbID === movie.imdbID)
+                ? 'Added to Favorites'
+                : 'Add Favorite'}
+            </button> */}
           </div>
         ))}
       </div>
