@@ -14,16 +14,17 @@ export default function AuthPage({ setUser }) {
     }
   }
   return (
-    <div>
+    <div className='form-container'>
       <h1>Welcome to Couch Potato!</h1>
       <img className="home-logo" src={logo} alt="Logo" />
+      
       { userPref === 'signup' ? <SignUpForm setUser={setUser}/> : <LoginForm setUser={setUser} />}
       <button onClick={handlePref}>
         { userPref === 'signup' ? 'Already a member? Log In' : 'Need an Account? Sign Up'}
       </button>
       <p>User info can be name: xxx, email: xxx@xxx.com, pword:xxx </p>
     </div>
-
+    
     
   );
 }

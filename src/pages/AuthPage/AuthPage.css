@@ -1,62 +1,111 @@
+/* AuthPage.css */
+
 .auth-page {
-    background-color: teal;
-    color: tan;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
+  background-color: teal;
+  color: tan;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-page h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.auth-page button {
+  background-color: tan;
+  color: teal;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.auth-page button:hover {
+  background-color: #a1887f;
+}
+
+.auth-page form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-page form label {
+  margin-bottom: 10px;
+}
+
+.auth-page form input[type="text"],
+.auth-page form input[type="password"] {
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.auth-page form button {
+  background-color: tan;
+  color: teal;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-page form button:hover {
+  background-color: #a1887f;
+}
+
+/* Media query for screens with a maximum width of 600px (typical for mobile screens) */
+@media (max-width: 600px) {
   .auth-page h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .auth-page button {
-    background-color: tan;
-    color: teal;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .auth-page button:hover {
-    background-color: #a1887f;
-  }
-  
-  .auth-page form {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-page form label {
+    font-size: 20px;
     margin-bottom: 10px;
   }
-  
+
+  .auth-page button {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .auth-page form {
+    width: 100%;
+  }
+
+  .auth-page form label {
+    font-size: 14px;
+  }
+
   .auth-page form input[type="text"],
   .auth-page form input[type="password"] {
+    font-size: 14px;
     padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: none;
+    margin-bottom: 5px;
   }
-  
+
   .auth-page form button {
-    background-color: tan;
-    color: teal;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 14px;
   }
-  
-  .auth-page form button:hover {
-    background-color: #a1887f;
+
+  .error-message {
+    font-size: 14px;
   }
-  
+}
+
+/* SignUpForm.css and LoginForm.css */
+.form-container {
+  /* Your existing styles */
+
+  /* Media query for screens with a maximum width of 600px (typical for mobile screens) */
+  @media (max-width: 600px) {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px; /* Add some padding to improve readability */
+  }
+}
