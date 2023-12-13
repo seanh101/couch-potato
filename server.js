@@ -26,7 +26,7 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://couch-potato.onrender.com']
+  origin: ['http://localhost:3000', 'https://couch-potato.onrender.com', 'https://couchpotato.app']
 }))
 
 app.use((req, res, next) => {
