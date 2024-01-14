@@ -1,0 +1,31 @@
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .movie-poster {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .tmdb-logo {
+    max-width: 100px; /* Adjust the width as needed */
+   
+  }
+  
+  .tagline {
+    margin-top: 10px;
+  }
+  

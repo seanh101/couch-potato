@@ -24,6 +24,8 @@ export default function NavBar({ user, setUser }) {
       &nbsp; | &nbsp;
       <Link to="/stream">Stream Search</Link>
       &nbsp;&nbsp;
+      <Link to="/new">New+Upcoming</Link>
+      &nbsp;&nbsp;
       {user ? (
         <>
           <span> {user.name}</span>
