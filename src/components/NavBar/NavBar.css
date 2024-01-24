@@ -2,19 +2,32 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: tan; /* Lighter background for a clean look */
+  background-color: tan;
   padding: 10px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-container {
   display: flex;
   align-items: center;
+  /* No change needed here */
 }
 
 .logo {
   height: 50px;
   width: auto;
+  /* No change needed here */
+}
+
+.app-title {
+  font-family: 'Impact', sans-serif;
+  color: teal;
+  text-shadow: 2px 2px white;
+  margin: 0 auto; /* Centers the title */
+  position: absolute; /* Use absolute positioning */
+  left: 50%; /* Start at 50% of the parent */
+  transform: translateX(-50%); /* Offset by half the width of the title */
+  font-size: 50px;
 }
 
 .nav-links {
@@ -22,6 +35,7 @@ nav {
   display: flex;
   margin: 0;
   padding: 0;
+  /* No change needed here */
 }
 
 .nav-links li {
@@ -31,29 +45,116 @@ nav {
 .nav-links a {
   color: #333;
   text-decoration: none;
-  font-weight: bold; /* Make links bold for better readability */
+  font-weight: bold;
 }
-
-.user-name {
-  font-style: italic; /* Differentiate the user name style */
-}
-
-/* Responsive design adjustments */
+/* Styles for mobile */
 @media (max-width: 768px) {
-  nav {
+  .navbar {
     flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: tan;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative; /* Add position relative to the navbar */
+  }
+
+  .menu-icon {
+    display: block;
+    cursor: pointer;
+    position: absolute; /* Position the menu icon absolutely */
+    right: 10px; /* Align to the far right */
+    top: 10px; /* Align to the top, adjust as needed */
+  }
+
+  .menu-container {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Ensure the container takes the full width */
+  }
+
+
+
+  .logo-container {
+    display: none; /* Hide the logo on mobile */
+  }
+
+  .mobile-title {
+    /* Apply the previous font, teal color, and white text shadow to the app title */
+    font-family: 'Impact', sans-serif;
+    color: teal;
+    text-shadow: 2px 2px white;
+    font-size: 24px; /* Adjust font size as needed */
+    margin: 10px 0; /* Add margin for spacing */
   }
 
   .nav-links {
+    list-style: none;
+    display: none; /* Hide navigation items by default on mobile */
     flex-direction: column;
     align-items: center;
+    margin: 10px 0;
+    padding: 0;
+  }
+
+  .nav-links.open {
+    display: flex; /* Display navigation items when the menu is open */
   }
 
   .nav-links li {
-    margin: 5px 0;
+    margin: 0 10px;
+  }
+
+  .nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .menu-icon.open .bar {
+    background-color: #333;
+  }
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0;
+    transition: 0.4s;
+  }
+
+  /* Styles for the dropdown menu */
+  .nav-dropdown {
+    display: none; /* Hide the dropdown by default */
+    text-align: center; /* Center the dropdown items */
+    background-color: tan;
+  }
+
+  .nav-dropdown.open {
+    display: block; /* Display the dropdown when the menu is open */
+  }
+
+  .nav-dropdown ul {
+    padding: 0;
+    margin: 10px 0;
+    list-style: none;
+  }
+
+  .nav-dropdown li {
+    margin: 10px 0;
+  }
+
+  .nav-dropdown a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px; /* Adjust font size as needed */
   }
 }
 
-
-
+/* Styles for desktop */
+@media (min-width: 769px) {
+  .mobile-title {
+    display: none; /* Hide the app title on desktop */
+  }
+}

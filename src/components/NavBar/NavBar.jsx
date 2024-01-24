@@ -1,36 +1,40 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
-import logo from './potato2.jpeg'; 
-import './NavBar.css'
+import logo from './potato2.jpeg';
+import './NavBar.css';
 
 export default function NavBar({ user, setUser }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   function handleLogOut() {
     userService.logOut();
     setUser(null);
   }
 
   return (
-    <nav>
+    <nav className={`navbar ${mobileMenuOpen ? 'open' : ''}`}>
       <div className="logo-container">
         <Link to="/">
-          <img className="logo" src={logo} alt="Logo" />
+          <img className={`logo ${mobileMenuOpen ? 'hidden' : ''}`} src={logo} alt="Logo" />
         </Link>
       </div>
-      <ul className="nav-links">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/movies">Favorites</Link></li>
-        <li><Link to="/search">Search Film & TV</Link></li>
-        <li><Link to="/stream">Stream Search</Link></li>
-        <li><Link to="/new">New+Upcoming</Link></li>
-        {user ? (
-          <>
-            <li className="user-name">{user.name}</li>
-            <li><Link to="" onClick={handleLogOut}>Log Out</Link></li>
-          </>
-        ) : (
-          <li><Link to="/auth">Sign Up / Log In</Link></li>
-        )}
-      </ul>
+      <div className={`menu-icon ${mobileMenuOpen ? 'open' : ''}`} onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
+      </div>
+      {/* Display the "Couch Potato" title on mobile */}
+      <div className={`mobile-title ${mobileMenuOpen ? 'open' : ''}`}>
+        Couch Potato
+      </div>
+      <div className={`nav-dropdown ${mobileMenuOpen ? 'open' : ''}`}>
+        <ul className={`nav-links ${mobileMenuOpen ? 'open' : ''}`}>
+          <li><Link to="/stream">Stream Search</Link></li>
+          <li><Link to="/new">New+Upcoming</Link></li>
+          {/* Other links... */}
+        </ul>
+      </div>
     </nav>
   );
 }

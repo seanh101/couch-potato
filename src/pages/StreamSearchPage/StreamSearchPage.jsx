@@ -143,7 +143,9 @@ function StreamSearchPage({ user }) {
 
   return (
     <div className="stream-search-container">
+      
       <img className="logo" src={logo1} alt="Logo" />
+      
       <h3>Movie & TV Stream Finder</h3>
       <form className="search-form" onSubmit={handleSearch}>
         <input
