@@ -28,4 +28,11 @@
   .tagline {
     margin-top: 10px;
   }
+
+  .movie-title {
+    color: black;
+  }
   
+  button {
+    font-size: 15px;
+  }

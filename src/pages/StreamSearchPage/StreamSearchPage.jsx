@@ -12,6 +12,7 @@ import appleTVPlusLogo from './apple-tv-plus-logo.png';
 import starzLogo from './starz-logo.png';
 import showtimeLogo from './showtime-logo.png';
 import logo1 from './potato2.jpeg'
+import { Helmet } from 'react-helmet'
 // import { getToken } from '../../utilities/users-service';
 
 const streamingServiceLogos = {
@@ -142,6 +143,12 @@ function StreamSearchPage({ user }) {
 
 
   return (
+    <>
+    <Helmet>
+      <title>Stream Search - Couch Potato</title>
+      {/* You can also add meta tags here if needed */}
+    </Helmet>
+    
     <div className="stream-search-container">
       
       <img className="logo" src={logo1} alt="Logo" />
@@ -246,6 +253,7 @@ function StreamSearchPage({ user }) {
         ))}
       </div>
     </div>
+    </>
   );
 }
 

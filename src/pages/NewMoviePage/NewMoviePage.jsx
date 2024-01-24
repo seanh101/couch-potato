@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './NewMoviePage.css';
 import tmdbLogo from './tmdb.svg';
+import { Helmet } from 'react-helmet';
 
 function NewMoviePage() {
   const [movies, setMovies] = useState([]);
@@ -74,6 +75,15 @@ function NewMoviePage() {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>New & Upcoming Movies - Couch Potato</title>
+      <meta 
+        name="description" 
+        content="Discover new and upcoming movies. Stay updated with the latest releases and find out what's coming soon. Browse and explore a wide range of new and future movie releases." 
+      />
+      {/* Add other relevant meta tags here */}
+    </Helmet>
     <div className="container">
     <h1>New & Upcoming Movies</h1>
     <img className="tmdb-logo" src={tmdbLogo} alt="TMDb Logo" />
@@ -91,7 +101,7 @@ function NewMoviePage() {
             <h2 className="movie-title">{movie.title}</h2>
             <img className="movie-poster" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
             {/* Button to toggle overview visibility */}
-            <button onClick={() => toggleOverview(movie.id)}>Overview</button>
+            <button onClick={() => toggleOverview(movie.id)}>Plot</button>
             {/* Show or hide overview based on visibility state */}
             {overviewVisible[movie.id] ? (
               <p className="movie-overview">{movie.overview}</p>
@@ -113,6 +123,7 @@ function NewMoviePage() {
         This website uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
       </div>
     </div>
+    </>
   );
 }
 

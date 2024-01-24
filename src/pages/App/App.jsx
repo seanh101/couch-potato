@@ -18,6 +18,7 @@ export default function App() {
       <NavBar user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<StreamSearchPage />} /> 
+        <Route path="/home" element={<HomePage />} /> 
         {user && (
           <>
             <Route path="/movies" element={<FavoriteMoviePage user={user} />} />

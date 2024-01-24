@@ -32,6 +32,7 @@ export default function NavBar({ user, setUser }) {
         <ul className={`nav-links ${mobileMenuOpen ? 'open' : ''}`}>
           <li><Link to="/stream">Stream Search</Link></li>
           <li><Link to="/new">New+Upcoming</Link></li>
+          <li><Link to="/home">About</Link></li>
           {/* Other links... */}
         </ul>
       </div>
