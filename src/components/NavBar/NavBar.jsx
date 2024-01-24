@@ -12,31 +12,25 @@ export default function NavBar({ user, setUser }) {
   return (
     <nav>
       <div className="logo-container">
-        <Link to="/stream">
+        <Link to="/">
           <img className="logo" src={logo} alt="Logo" />
         </Link>
       </div>
-      <Link to="/">Home</Link>
-      &nbsp; | &nbsp;
-      <Link to="/movies">Favorites</Link>
-      &nbsp; | &nbsp;
-      <Link to="/search">Search Film & TV</Link>
-      &nbsp; | &nbsp;
-      <Link to="/stream">Stream Search</Link>
-      &nbsp;&nbsp;
-      <Link to="/new">New+Upcoming</Link>
-      &nbsp;&nbsp;
-      {user ? (
-        <>
-          <span> {user.name}</span>
-          &nbsp;&nbsp;
-          <Link to="" onClick={handleLogOut}>Log Out</Link>
-        </>
-      ) : (
-        <>
-          <Link to="/auth">Sign Up / Log In</Link>
-        </>
-      )}
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/movies">Favorites</Link></li>
+        <li><Link to="/search">Search Film & TV</Link></li>
+        <li><Link to="/stream">Stream Search</Link></li>
+        <li><Link to="/new">New+Upcoming</Link></li>
+        {user ? (
+          <>
+            <li className="user-name">{user.name}</li>
+            <li><Link to="" onClick={handleLogOut}>Log Out</Link></li>
+          </>
+        ) : (
+          <li><Link to="/auth">Sign Up / Log In</Link></li>
+        )}
+      </ul>
     </nav>
   );
 }

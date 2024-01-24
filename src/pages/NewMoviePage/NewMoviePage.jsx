@@ -75,18 +75,18 @@ function NewMoviePage() {
 
   return (
     <div className="container">
-      <h1>New & Upcoming Movies</h1>
-      <img className="tmdb-logo" src={tmdbLogo} alt="TMDb Logo" />
-      <div>
-        <label>Release filter: </label>
-        <select onChange={(e) => setReleaseFilter(e.target.value)} value={releaseFilter}>
-          <option value="all">All</option>
-          <option value="newly-released">Newly Released</option>
-          <option value="upcoming">Upcoming Releases</option>
-        </select>
-      </div>
-      <div className="movies">
-        {movies.map((movie) => (
+    <h1>New & Upcoming Movies</h1>
+    <img className="tmdb-logo" src={tmdbLogo} alt="TMDb Logo" />
+    <div>
+      <label>Release filter: </label>
+      <select onChange={(e) => setReleaseFilter(e.target.value)} value={releaseFilter}>
+        <option value="all">All</option>
+        <option value="newly-released">Newly Released</option>
+        <option value="upcoming">Upcoming Releases</option>
+      </select>
+    </div>
+    <div className="movies">
+      {movies.map((movie) => (
           <div key={movie.id} className="movie">
             <h2 className="movie-title">{movie.title}</h2>
             <img className="movie-poster" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
